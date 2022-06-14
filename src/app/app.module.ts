@@ -8,6 +8,7 @@ import { WelcomeComponent } from './components/welcome/welcome.component';
 import { BannersComponent } from './components/banners/banners.component';
 import { PokedexComponent } from './components/pokedex/pokedex.component';
 import { CardComponent } from './components/pokedex/components/card/card.component';
+import { PresentationComponent } from './components/presentation/presentation.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { CardComponent } from './components/pokedex/components/card/card.compone
     WelcomeComponent,
     BannersComponent,
     PokedexComponent,
-    CardComponent
+    CardComponent,
+    PresentationComponent
   ],
   imports: [
     BrowserModule,

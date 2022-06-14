@@ -1,0 +1,16 @@
+.pokedex-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.horizontal-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.title {
+  font: 700 30px Nunito;
+  color: #2F3E77;
+}

@@ -1,0 +1,34 @@
+.banners-wrapper  {
+  display: flex;
+  height: 370px;
+  gap: 30px;
+  z-index: 3;
+}
+
+.banner {
+  width: 162px;
+  height: 302px;
+  border-radius: 12px;
+  overflow: hidden;
+
+  box-shadow: 0px 15px 15px rgba(234, 104, 109, 0.1);
+
+  &.charmander {
+    background: #f88b22;
+  }
+
+  &.bulbasaur {
+    background: #9bd2cd;
+    position: relative;
+    top: 68px;
+  }
+
+  &.pikachu {
+    background: #fccc3c;
+  }
+}
+
+.banner__img {
+  width: inherit;
+  height: inherit;
+}

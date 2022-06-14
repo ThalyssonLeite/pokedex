@@ -5,12 +5,18 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SquareShapeComponent } from './components/square-shape/square-shape.component';
 import { WelcomeComponent } from './components/welcome/welcome.component';
+import { BannersComponent } from './components/banners/banners.component';
+import { PokedexComponent } from './components/pokedex/pokedex.component';
+import { CardComponent } from './components/pokedex/components/card/card.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SquareShapeComponent,
-    WelcomeComponent
+    WelcomeComponent,
+    BannersComponent,
+    PokedexComponent,
+    CardComponent
   ],
   imports: [
     BrowserModule,

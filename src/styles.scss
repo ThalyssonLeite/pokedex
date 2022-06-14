@@ -1,9 +1,12 @@
+@import './styles/_icons';
+
 /* You can add global styles to this file, and also import other style files */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   outline: none;
+  border: 0;
 }
 
 body {
@@ -12,4 +15,7 @@ body {
   background: linear-gradient(180deg, #EFF4FA 0%, rgba(239, 244, 250, 0) 102.84%);
 }
 
+.z-index {
+  z-index: 0;
+}
 

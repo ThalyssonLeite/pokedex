@@ -14,3 +14,9 @@
   font: 700 30px Nunito;
   color: #2F3E77;
 }
+
+.pokedex {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 32px;
+}

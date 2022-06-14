@@ -1,6 +1,6 @@
 .welcome-wrapper {
   font-family: Nunito;
-  max-width: 450px;
+  max-width: 470px;
 
   display: flex;
   flex-direction: column;
@@ -61,9 +61,14 @@
   border-radius: 0px 5px 5px 0px;
 
   z-index: 1;
-  transition: 200ms ease;
+  transition: 100ms ease;
 
   &:hover {
-    filter: brightness(0.98);
+    filter: brightness(0.975);
+  }
+
+  &:active {
+    transition: 0ms;
+    filter: brightness(0.94);
   }
 }

@@ -11,7 +11,7 @@
 }
 
 .shape {
-  position: absolute;
+  position: fixed;
   z-index: 0;
 
   &.left {
@@ -34,4 +34,11 @@
   z-index: 1;
   display: flex;
   justify-content: space-between;
+}
+
+.spacer {
+  content: "";
+  min-height: 1px;
+  width: 100%;
+  margin-top: 37px
 }

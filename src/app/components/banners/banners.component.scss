@@ -10,6 +10,7 @@
   height: 302px;
   border-radius: 12px;
   overflow: hidden;
+  transition: 300ms cubic-bezier(.6,.11,.65,1.2);
 
   box-shadow: 0px 15px 15px rgba(234, 104, 109, 0.1);
 
@@ -25,6 +26,10 @@
 
   &.pikachu {
     background: #fccc3c;
+  }
+
+  &:hover {
+    filter: brightness(1.1);
   }
 }
 

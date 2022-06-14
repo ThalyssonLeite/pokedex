@@ -1,0 +1,16 @@
+.squares-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7.5px;
+  width: 127.5px;
+  height: 127.5px;
+  transform: rotate(14deg);
+}
+
+.square {
+  width: 15px;
+  height: 15px;
+  clip-path: circle();
+  background: #EA686D1A;
+  pointer-events: none;
+}

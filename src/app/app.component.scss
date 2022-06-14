@@ -1,0 +1,26 @@
+.poke-wrapper {
+  height: 100vh;
+  max-width: 1360px;
+  margin: auto;
+  position: relative;
+  padding: 38px 64px;
+}
+
+.shape {
+  position: absolute;
+
+  &.left {
+    top: 470px;
+    left: -63.5px;
+  }
+
+  &.middle {
+    top: 18px;
+    left: 50%;
+  }
+
+  &.right {
+    top: 360px;
+    right: 349.5px;
+  }
+}

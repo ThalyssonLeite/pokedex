@@ -9,6 +9,7 @@ import { BannersComponent } from './components/banners/banners.component';
 import { PokedexComponent } from './components/pokedex/pokedex.component';
 import { CardComponent } from './components/pokedex/components/card/card.component';
 import { PresentationComponent } from './components/presentation/presentation.component';
+import { PaginationComponent } from './components/pokedex/components/pagination/pagination.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { PresentationComponent } from './components/presentation/presentation.co
     BannersComponent,
     PokedexComponent,
     CardComponent,
-    PresentationComponent
+    PresentationComponent,
+    PaginationComponent
   ],
   imports: [
     BrowserModule,

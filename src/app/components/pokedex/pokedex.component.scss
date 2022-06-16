@@ -61,4 +61,16 @@
     }
   }
 
+  &:hover {
+    filter: contrast(1.15);
+  }
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+}
+
+.clear-search-results {
+  @extend .filter;
 }

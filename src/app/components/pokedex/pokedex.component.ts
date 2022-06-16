@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { PokedexService } from 'src/app/services/pokedex.service';
+import { setSearchResults } from '../welcome/store/welcome.actions';
 import { setFilter, setPokeList, setResults } from './store/pokedex.actions';
 
 @Component({
@@ -57,7 +58,7 @@ export class PokedexComponent implements OnInit {
 
       this.updateDataSource();
 
-      if (searchResults.length) this[`${this.activeFilter}Filter`]();;
+      if (searchResults) this[`${this.activeFilter}Filter`]();
     });
   }
 
@@ -113,5 +114,15 @@ export class PokedexComponent implements OnInit {
     this.dataSource = this.searchResults.length
       ? [...this.searchResults]
       : [...this.results];
+  }
+
+  resetSearchResults () {
+    this.store.dispatch(setSearchResults({ searchResults: [] }));
+  }
+
+  choosePokemon (pokemon: any): void {
+    if (!pokemon) return;
+
+
   }
 }

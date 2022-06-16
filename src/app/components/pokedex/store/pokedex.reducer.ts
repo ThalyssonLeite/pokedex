@@ -6,6 +6,7 @@ export interface State {
   names: string[],
   results: any[],
   filter: string,
+  choosenPokemon: any,
 }
 
 export const initialState: State = {
@@ -13,6 +14,7 @@ export const initialState: State = {
   names: [],
   results: [],
   filter: 'id',
+  choosenPokemon: {},
 }
 
 export const pokedexReducer = createReducer(
@@ -30,5 +32,8 @@ export const pokedexReducer = createReducer(
     ...state,
     results
   })),
-
+  on(PokedexActions.setChoosenPokemon, (state, { pokemon }) => ({
+    ...state,
+    pokemon
+  })),
 )

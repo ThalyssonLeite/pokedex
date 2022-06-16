@@ -2,7 +2,11 @@
   <div class="horizontal-bar">
     <div class="title">Pokédex</div>
 
-    <div class="filters margin-left-auto">
+    <div *ngIf="searchResults.length" class="clear-search-results margin-left-auto" (click)="resetSearchResults()">
+      <i class="loop-arrow-icon icon white-filter"></i>
+    </div>
+
+    <div class="filters" [class.margin-left-auto]="!searchResults.length">
       <div class="filter numerical" (click)="setFilter('id')" [class.is-active]="activeFilter === 'id'">
         0-9
       </div>
@@ -16,6 +20,6 @@
   </div>
 
   <div class="pokedex">
-    <poke-card *ngFor="let pokemon of pokemons" [pokemon]="pokemon"></poke-card>
+    <poke-card *ngFor="let pokemon of pokemons" [pokemon]="pokemon" (click)="choosePokemon(pokemon)"></poke-card>
   </div>
 </div>

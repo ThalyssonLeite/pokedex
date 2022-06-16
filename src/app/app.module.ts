@@ -11,6 +11,11 @@ import { CardComponent } from './components/pokedex/components/card/card.compone
 import { PresentationComponent } from './components/presentation/presentation.component';
 import { PaginationComponent } from './components/pokedex/components/pagination/pagination.component';
 import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { StoreModule } from '@ngrx/store';
+import { appReducers } from './store/app.store.config';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -21,12 +26,16 @@ import { CommonModule } from '@angular/common';
     PokedexComponent,
     CardComponent,
     PresentationComponent,
-    PaginationComponent
+    PaginationComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     CommonModule,
+    HttpClientModule,
+    FormsModule,
+    StoreModule.forRoot(appReducers),
+    StoreDevtoolsModule.instrument({ maxAge: 100 }),
   ],
   providers: [],
   bootstrap: [AppComponent]

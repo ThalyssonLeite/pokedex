@@ -7,7 +7,7 @@
 .horizontal-bar {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  gap: 16px;
 }
 
 .title {
@@ -19,4 +19,46 @@
   display: flex;
   flex-wrap: wrap;
   gap: 32px;
+}
+
+.filters {
+  display: flex;
+  gap: 8px;
+}
+
+.filter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  height: 32px;
+  width: 42px;
+  font: 700 16px Nunito;
+  border-radius: 4px;
+  background: #EA686D;
+  color: #fff;
+  cursor: pointer;
+  transition: all 200ms cubic-bezier(.6,.11,.65,1.2);
+  box-shadow: inset 0px 0px 5px 1px rgba($color: #000000, $alpha: 0.1);
+
+  &.is-active {
+    background: #fff;
+    color: #ea686D;
+    border: 2px solid #EA686D;
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: -2px;
+      left: -2px;
+      height: calc(100% + 4px);
+      width: calc(100% + 4px);
+      box-shadow: inset 0px 0px 2px 1px rgba($color: #000000, $alpha: 0.03);
+      border-radius: 5px;
+
+      z-index: 3;
+      pointer-events: none;
+    }
+  }
+
 }

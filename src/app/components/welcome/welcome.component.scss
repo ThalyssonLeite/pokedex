@@ -44,6 +44,11 @@
   color: rgba($color: #434961, $alpha: 0.7);
   font-size: 25px;
   z-index: 2;
+
+  &::placeholder {
+    color: rgba($color: #434961, $alpha: 0.34);
+    text-transform: capitalize;
+  }
 }
 
 .search-bar__button {

@@ -1,29 +1,28 @@
 export class PaginationLib {
   //Logica para criar o array de botões
   //@Param(items)
-  items: any[] = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100 ];
+  private items: any[] = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100 ];
   //@Param(items_per_page)
-  items_per_page: number;
+  private items_per_page: number;
   //@Param(number_of_visible_buttons)
-  number_of_visible_buttons: number;
+  private number_of_visible_buttons: number;
   //@Param(active_page)
-  active_page: number;
+  private active_page: number;
 
-  number_of_items: number;
-  number_of_pages: number;
-  pagination_buttons: any[];
+  private number_of_items: number;
+  private number_of_pages: number;
+  private pagination_buttons: any[];
+  readonly firstOutput: { items: any[], buttons: number[] };
 
-  constructor ({ items, itemsPerPage, visibleButtons }: { items: any[], itemsPerPage: number, visibleButtons: number}) {
-    this.items = items;
+  constructor ({ inputItems, itemsPerPage, visibleButtons }: { inputItems: any[], itemsPerPage: number, visibleButtons: number}) {
+    this.items = inputItems;
     this.items_per_page = itemsPerPage;
     this.number_of_visible_buttons = visibleButtons;
 
     this.number_of_items = this.items.length;
     this.number_of_pages = Math.ceil(this.number_of_items / this.items_per_page);
 
-    const generatePaginationButtons = (_, i) => ({ number: i + 1, active: false });
-
-    this.pagination_buttons = [...Array(this.number_of_pages).keys()].map(generatePaginationButtons);
+    this.firstOutput = this.setActivePage(1);
   }
 
   private getVisibleItems ({ items, active_page, rows_per_page }) {
@@ -68,10 +67,19 @@ export class PaginationLib {
     return pagination_buttons.slice(initialSlicePosition, finalSlicePosition);
   }
 
-  setActivePage (activePage: number): { visibleItems: any[], paginationSlice: number[] } {
-    this.active_page = activePage;
+  setActivePage (activePage: number): { items: any[], buttons: number[] } {
+    this.active_page =
+      activePage < 1
+        ? 1
+        : activePage > this.number_of_pages
+          ? this.number_of_pages
+          : Number(activePage);
 
-    this.pagination_buttons.forEach(page => page.active = page.number === this.active_page);
+    //generating pagination buttons
+    const generatePaginationButtons = (_, i) => ({ number: i + 1, active: false });
+    const temp = [...Array(this.number_of_pages).keys()].map(generatePaginationButtons)
+    temp.forEach(page => page.active = page.number === this.activePage);
+    this.pagination_buttons = temp;
 
     //Lógica para selecionar os items exibidos
     const visible_items = this.getVisibleItems({ items: this.items, active_page: this.active_page, rows_per_page: this.items_per_page });
@@ -84,8 +92,8 @@ export class PaginationLib {
     });
 
     return {
-      visibleItems: visible_items,
-      paginationSlice: visible_pagination_buttons
+      items: visible_items,
+      buttons: visible_pagination_buttons
     }
   }
 
@@ -97,5 +105,13 @@ export class PaginationLib {
   backwardPage () {
     if (this.active_page > 1) this.active_page -= 1;
     return this.setActivePage(this.active_page);
+  }
+
+  get activePage (): number {
+    return this.active_page || 1;
+  }
+
+  get numberOfPages (): number {
+    return this.number_of_pages;
   }
 }

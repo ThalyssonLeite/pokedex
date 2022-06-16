@@ -2,19 +2,20 @@
   <div class="horizontal-bar">
     <div class="title">Pokédex</div>
 
+    <div class="filters margin-left-auto">
+      <div class="filter numerical" (click)="setFilter('id')" [class.is-active]="activeFilter === 'id'">
+        0-9
+      </div>
+
+      <div class="filter alphabetical" (click)="setFilter('name')" [class.is-active]="activeFilter === 'name'">
+        A-z
+      </div>
+    </div>
+
     <poke-pagination></poke-pagination>
   </div>
 
   <div class="pokedex">
-    <poke-card></poke-card>
-    <poke-card></poke-card>
-    <poke-card></poke-card>
-    <poke-card></poke-card>
-    <poke-card></poke-card>
-    <poke-card></poke-card>
-    <poke-card></poke-card>
-    <poke-card></poke-card>
-    <poke-card></poke-card>
-    <poke-card></poke-card>
+    <poke-card *ngFor="let pokemon of pokemons" [pokemon]="pokemon"></poke-card>
   </div>
 </div>

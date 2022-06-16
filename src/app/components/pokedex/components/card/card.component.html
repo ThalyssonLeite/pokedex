@@ -1,20 +1,21 @@
 <div class="card">
   <div class="block first">
-    <div class="name">Pidgeotto</div>
-    <div class="cod">#COD</div>
+    <div class="name">{{ pokemon.name }}</div>
+    <div class="cod">#{{ pokemon.id }}</div>
   </div>
   <div class="block second">
-    <img draggable="false" class="image" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png">
+    <img *ngIf="pokemon.sprites.front_default" draggable="false" class="image" [src]="pokemon.sprites.front_default">
+    <div *ngIf="!pokemon.sprites.front_default"class="no-image">SEM IMAGEM</div>
   </div>
 
   <div class="block third">
     <div class="height stat">
       <div class="stat__height name">Altura:</div>
-      <div class="stat__height value">1.10cm</div>
+      <div class="stat__height value">{{ pokemon.height / 10}}m</div>
     </div>
     <div class="weight stat">
       <div class="stat__weight name">Peso:</div>
-      <div class="stat__weight value">9.9kg</div>
+      <div class="stat__weight value">{{ pokemon.weight / 10}}kg</div>
     </div>
   </div>
 </div>

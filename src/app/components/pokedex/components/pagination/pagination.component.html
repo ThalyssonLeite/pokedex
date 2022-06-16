@@ -1,13 +1,20 @@
-<div class="pagination">
-  <div class="pagination__arrow left" (click)="backward()">
-    <i class="fallen-v-arrow-icon pagination__icon left white-filter"></i>
+<div class="pagination-wrapper">
+  <div class="go-to-page">
+    <input [(ngModel)]="input" type="text" class="input" placeholder="n°" (input)="formatInput($event)">
+    <div class="go-button" (click)="setActivePage(input)">Ir</div>
   </div>
 
-  <div class="pagination__button" *ngFor="let buttons of paginationSlice" [class.is-active]="buttons.active" (click)="setActivePage(buttons.number)">
-    {{ buttons.number }}
-  </div>
+  <div class="pagination">
+    <div class="pagination__arrow left" (click)="backward()">
+      <i class="fallen-v-arrow-icon pagination__icon left white-filter"></i>
+    </div>
 
-  <div class="pagination__arrow right" (click)="forward()">
-    <i class="fallen-v-arrow-icon pagination__icon right white-filter"></i>
+    <div class="pagination__button z-index" *ngFor="let button of buttons" [class.is-active]="button.active" (click)="setActivePage(button.number)">
+      {{ button.number }}
+    </div>
+
+    <div class="pagination__arrow right" (click)="forward()">
+      <i class="fallen-v-arrow-icon pagination__icon right white-filter"></i>
+    </div>
   </div>
 </div>

@@ -4,12 +4,14 @@ import * as PokedexActions from './pokedex.actions';
 export interface State {
   urls: string[],
   names: string[],
+  results: any[],
   filter: string,
 }
 
 export const initialState: State = {
   urls: [],
   names: [],
+  results: [],
   filter: 'id',
 }
 
@@ -24,4 +26,9 @@ export const pokedexReducer = createReducer(
     ...state,
       filter
   })),
+  on(PokedexActions.setResults, (state, { results }) => ({
+    ...state,
+    results
+  })),
+
 )

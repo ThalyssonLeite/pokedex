@@ -1,14 +1,20 @@
 <div class="welcome-wrapper">
   <div class="title">Explore o mundo dos <span>Pokémons</span></div>
+
   <div class="description">Descubra todas as espécies de Pokémons</div>
+
   <div class="search-bar">
-    <input type="text" class="search-bar__input" [attr.placeholder]="randomPokemon" [(ngModel)]="searchInput" (input)="generateSugestions()">
-    <div class="search-bar__button">Buscar</div>
+    <input type="text" class="search-bar__input" [attr.placeholder]="randomPokemon" [(ngModel)]="searchInput" (input)="generateSugestions()" spellcheck="false">
+    <div class="search-bar__button" (click)="submitSearch(searchInput); chooseSugestion(searchInput)">Buscar</div>
 
     <div class="search-sugestions">
       <div class="sugestions" *ngFor="let sugestion of sugestions">
-        {{ sugestion }}
+        <div class="sugestion" (click)="chooseSugestion(sugestion)">{{ sugestion }}</div>
       </div>
     </div>
+  </div>
+
+  <div class="pokemon-not-exists" *ngIf="!pokemonExists">
+    *Não encontramos nenhum pokémon com esse nome
   </div>
 </div>

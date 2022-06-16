@@ -25,6 +25,7 @@
 }
 
 .search-bar {
+  position: relative;
   height: 45px;
   display: flex;
 }
@@ -35,7 +36,7 @@
   border: none;
   width: 100%;
 
-  background: #FFFFFF;
+  background: #fff;
   border: 1px solid #F4F4F4;
   box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.15);
   border-radius: 5px 0px 0px 5px;
@@ -44,6 +45,7 @@
   color: rgba($color: #434961, $alpha: 0.7);
   font-size: 25px;
   z-index: 2;
+  text-transform: capitalize;
 
   &::placeholder {
     color: rgba($color: #434961, $alpha: 0.34);
@@ -57,10 +59,12 @@
 
   background: #EA686D;
   font: 700 22px Nunito;
-  color: #FFFFFF;
+  color: #fff;
+
   display: flex;
+  justify-content: center;
   align-items: center;
-  padding: 0 18px;
+  min-width: 106px;
 
   box-shadow: 0px 4px 15px #EA686D;
   border-radius: 0px 5px 5px 0px;
@@ -76,4 +80,41 @@
     transition: 0ms;
     filter: brightness(0.94);
   }
+}
+
+.search-sugestions {
+  position: absolute;
+
+  top: calc(100% - 3px);
+  left: 0;
+  width: calc(100% - 106px);
+  background: #fff;
+  z-index: 3;
+
+  box-shadow: 0px 9px 16px -10px rgb(0 0 0 / 15%), 6px 0px 10px -10px rgb(0 0 0 / 15%), -6px 0px 10px -10px rgb(0 0 0 / 15%);
+  border-radius: 0px 0px 5px 5px;
+  overflow: hidden;
+}
+
+.sugestion {
+  color: rgba($color: #434961, $alpha: 0.7);
+  font-size: 25px;
+  padding: 0 16px;
+  background: #fff;
+
+  cursor: pointer;
+  transition: 100ms ease;
+
+  &:hover {
+    filter: brightness(0.97);
+  }
+
+  text-transform: capitalize;
+}
+
+.pokemon-not-exists {
+  font: 500 16px Nunito;
+  color: #EA686D;
+
+  transform: translateY(-12px);
 }

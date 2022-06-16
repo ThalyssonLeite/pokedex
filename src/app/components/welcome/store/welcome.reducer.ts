@@ -1,12 +1,14 @@
 import { createReducer, on } from "@ngrx/store";
-import * as WelcomeActions from './pokedex.actions';
+import * as WelcomeActions from './welcome.actions';
 
 export interface State {
   randomPokemon: string | undefined;
+  searchResults: any[];
 }
 
 export const initialState: State = {
   randomPokemon: undefined,
+  searchResults: [],
 }
 
 export const welcomeReducer = createReducer(
@@ -14,5 +16,9 @@ export const welcomeReducer = createReducer(
   on(WelcomeActions.setRandomPokemon, (state, { pokemon: randomPokemon }) => ({
     ...state,
       randomPokemon
+  })),
+  on(WelcomeActions.setSearchResults, (state, { searchResults: searchResults }) => ({
+    ...state,
+    searchResults
   })),
 )

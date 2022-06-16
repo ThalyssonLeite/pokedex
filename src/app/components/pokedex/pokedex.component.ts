@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { PokedexService } from 'src/app/services/pokedex.service';
-import { setFilter, setPokeList } from './store/pokedex.actions';
+import { setFilter, setPokeList, setResults } from './store/pokedex.actions';
 
 @Component({
   selector: 'poke-pokedex',
@@ -11,25 +11,33 @@ import { setFilter, setPokeList } from './store/pokedex.actions';
 export class PokedexComponent implements OnInit {
 
   pokemons: any[];
-  results: any[];
   activeFilter: string = 'id';
+  results: any[];
+  searchResults: any[] = [];
+  dataSource: any[];
 
-  constructor (private pokedexService: PokedexService, private store: Store<{ pagination, pokedex }>) { };
+  constructor (private pokedexService: PokedexService, private store: Store<{ pagination, pokedex, welcome }>) { };
 
   ngOnInit(): void {
-    this.listenToPokemonsListChanges();
-    this.listenToFilterChanges();
+    this.getPokemons();
+    this.listenToPaginationChanges();
+    this.listenToPokedexChanges();
+    this.listenToSearchResultsChanges();
   }
 
-  listenToPokemonsListChanges () {
+  getPokemons () {
     this.pokedexService
-      .getPokeList()
-      .subscribe(res => {
-        this.results = [...res.results]
+    .getPokeList()
+    .subscribe(res => {
+      this.results = [...res.results]
 
-        this.idFilter();
-      });
+      this.store.dispatch(setResults({ results: this.results }));
 
+      this[`${this.activeFilter}Filter`]();
+    })
+  }
+
+  listenToPaginationChanges () {
     this.store.select('pagination').subscribe(({ pagination }) => {
       if (!pagination?.items) return;
 
@@ -37,9 +45,19 @@ export class PokedexComponent implements OnInit {
     })
   }
 
-  listenToFilterChanges () {
-    this.store.select('pokedex').subscribe(({ filter }) => {
-      if (filter && filter !== this.activeFilter) this[`${filter}Filter`]() ;
+  listenToPokedexChanges () {
+    this.store.select('pokedex').subscribe(({ filter, searchResults }) => {
+      if (filter && filter !== this.activeFilter) this[`${filter}Filter`]();
+    });
+  }
+
+  listenToSearchResultsChanges () {
+    this.store.select('welcome').subscribe(({ searchResults }) => {
+      this.searchResults = searchResults;
+
+      this.updateDataSource();
+
+      if (searchResults.length) this[`${this.activeFilter}Filter`]();;
     });
   }
 
@@ -52,21 +70,25 @@ export class PokedexComponent implements OnInit {
 
   nameFilter () {
     this.activeFilter = 'name';
-    if (!this.results) return;
+    this.updateDataSource();
 
-    this.results.sort((a, b) => a.name.localeCompare(b.name));
+    if (!this.dataSource) return;
 
-    const names = this.results.map(result => result.name);
-    let urls = this.results.map(result => result.url);
+    this.dataSource.sort((a, b) => a.name.localeCompare(b.name));
+
+    const names = this.dataSource.map(result => result.name);
+    let urls = this.dataSource.map(result => result.url);
 
     this.store.dispatch(setPokeList({ names, urls }));
   }
 
   idFilter () {
     this.activeFilter = 'id';
-    if (!this.results) return;
+    this.updateDataSource();
 
-    this.results.sort((a, b) => {
+    if (!this.dataSource) return;
+
+    this.dataSource.sort((a, b) => {
       const extractIdRegex = /pokemon\/(.+?)\//;
 
       a = parseInt(a.url.match(extractIdRegex)[1]);
@@ -75,13 +97,21 @@ export class PokedexComponent implements OnInit {
       return a - b;
     });
 
-    const names = this.results.map(result => result.name);
-    let urls = this.results.map(result => result.url);
+    const names = this.dataSource.map(result => result.name);
+    let urls = this.dataSource.map(result => result.url);
 
     this.store.dispatch(setPokeList({ names, urls }));
   }
 
   setFilter (filtername: string) {
     this.store.dispatch(setFilter({ filtername }));
+  }
+
+  updateDataSource (): any {
+    if (!this.results) return;
+
+    this.dataSource = this.searchResults.length
+      ? [...this.searchResults]
+      : [...this.results];
   }
 }

@@ -10,6 +10,7 @@ import { PokedexComponent } from './components/pokedex/pokedex.component';
 import { CardComponent } from './components/pokedex/components/card/card.component';
 import { PresentationComponent } from './components/presentation/presentation.component';
 import { PaginationComponent } from './components/pokedex/components/pagination/pagination.component';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { PaginationComponent } from './components/pokedex/components/pagination/
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    CommonModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -71,7 +71,7 @@ b {
   content: "";
   width: 80%;
   height: 80%;
-  border: 2px dashed #f4f4f4;
+  border: 3px dashed #f4f4f4;
   background-color: #f4f4f420;
   border-radius: 50%;
   position: absolute;
@@ -222,13 +222,13 @@ b {
   justify-content: center;
   cursor: pointer;
 
-  box-shadow: 0px 5px 0px 0px #041549;
-  transition: 30ms cubic-bezier(.6,.11,.65,1.2);
+  box-shadow: 0px 6px 0px 0px #041549, inset 0px 0px 3px 1px rgb(0 0 0 / 60%);
+  transition: 200ms cubic-bezier(.6,.11,.65,1.2);
 
   &:active {
-    box-shadow: 0px 0px 0px 0px #041549;
+    box-shadow: 0px 0px 0px 0px #041549, inset 0px 0px 3px 1px rgb(0 0 0 / 60%);
     transform: translateY(4px);
-    background: #283d82;
+    filter: brightness(1.06)
   };
 }
 

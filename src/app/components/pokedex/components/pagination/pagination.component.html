@@ -1,0 +1,13 @@
+<div class="pagination">
+  <div class="pagination__arrow left" (click)="backward()">
+    <i class="fallen-v-arrow-icon pagination__icon left white-filter"></i>
+  </div>
+
+  <div class="pagination__button" *ngFor="let buttons of paginationSlice" [class.is-active]="buttons.active" (click)="setActivePage(buttons.number)">
+    {{ buttons.number }}
+  </div>
+
+  <div class="pagination__arrow right" (click)="forward()">
+    <i class="fallen-v-arrow-icon pagination__icon right white-filter"></i>
+  </div>
+</div>

@@ -18,4 +18,8 @@ export const presentationReducer = createReducer(
     choosenPokemon,
     visible: true,
   })),
+  on(PresentationActions.closePresentation, (state) => ({
+    ...state,
+    visible: false,
+  })),
 )

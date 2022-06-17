@@ -1,7 +1,4 @@
-<div class="presentation-wrapper">
-  <div class="invisible-overlay"></div>
-
-
+<div class="presentation-wrapper" [class.is-visible]="visible">
   <div class="presentation">
     <poke-square-shape class="shape right"></poke-square-shape>
     <poke-square-shape class="shape left"></poke-square-shape>
@@ -80,7 +77,7 @@
       <img draggable="false" class="image" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png">
     </div>
 
-    <button class="close-button">
+    <button class="close-button" (click)="closePresentation()">
       <div class="close-button__icon close-icon white-filter"></div>
     </button>
   </div>

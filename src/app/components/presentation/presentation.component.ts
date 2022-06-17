@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { closePresentation } from './store/presentation.actions';
 
 @Component({
   selector: 'poke-presentation',
@@ -19,4 +20,7 @@ export class PresentationComponent implements OnInit {
     });
   }
 
+  closePresentation (): void {
+    this.store.dispatch(closePresentation());
+  }
 }

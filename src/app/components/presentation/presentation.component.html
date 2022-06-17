@@ -8,17 +8,17 @@
 
     <div class="presentation__first">
       <div class="title section">
-        Charmeleon
+        {{ pokemon.name }}
 
         <div class="code-and-type">
           <div class="code">
-            COD: #0036
+            COD: #{{ pokemon.id }}
           </div>
 
           <div class="type">
             Tipo:
             <div class="type__badge">
-              Fogo
+              {{ pokemon.types[0].type.name }}
             </div>
           </div>
         </div>

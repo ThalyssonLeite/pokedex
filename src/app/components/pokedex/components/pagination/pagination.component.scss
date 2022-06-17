@@ -91,6 +91,10 @@
   color: rgba($color: #434961, $alpha: 0.7);
   font-size: 16px;
   z-index: 2;
+
+  &::placeholder {
+    user-select: none;
+  }
 }
 
 .go-button {

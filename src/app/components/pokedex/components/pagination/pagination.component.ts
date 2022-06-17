@@ -51,6 +51,7 @@ export class PaginationComponent implements OnInit, OnDestroy {
     if (!page) return;
     const output = this.paginationLib.setActivePage(page);
     this.updateState(output);
+    this.input = '';
   }
 
   forward (): void {

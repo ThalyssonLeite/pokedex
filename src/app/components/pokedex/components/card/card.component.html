@@ -4,8 +4,8 @@
     <div class="cod">#{{ pokemon.id }}</div>
   </div>
   <div class="block second">
-    <img *ngIf="pokemon.sprites.front_default" draggable="false" class="image" [src]="pokemon.sprites.front_default">
-    <div *ngIf="!pokemon.sprites.front_default"class="no-image">SEM IMAGEM</div>
+    <img *ngIf="pokemonImage" draggable="false" class="image" [src]="pokemonImage">
+    <div *ngIf="!pokemonImage"class="no-image">SEM IMAGEM</div>
   </div>
 
   <div class="block third">

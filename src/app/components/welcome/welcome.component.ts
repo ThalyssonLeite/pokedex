@@ -71,6 +71,8 @@ export class WelcomeComponent implements OnInit, OnDestroy {
   submitSearch (pokemon: string): any {
     if (!pokemon) return;
 
+    this.searchInput = '';
+
     this.filterAndDispacthSearchList(pokemon);
   }
 

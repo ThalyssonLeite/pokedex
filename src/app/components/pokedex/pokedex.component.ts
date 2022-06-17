@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { PokedexService } from 'src/app/services/pokedex.service';
+import { setChoosenPokemon } from '../presentation/store/presentation.actions';
 import { setSearchResults } from '../welcome/store/welcome.actions';
-import { setFilter, setPokeList, setResults } from './store/pokedex.actions';
+import { setImageType } from './components/card/store/card.actions';
+import {  setFilter, setPokeList, setResults } from './store/pokedex.actions';
 
 @Component({
   selector: 'poke-pokedex',
@@ -11,19 +13,22 @@ import { setFilter, setPokeList, setResults } from './store/pokedex.actions';
 })
 export class PokedexComponent implements OnInit {
 
+  imageTypes: string[] = ['Oficial', 'Pixel art', '3D', 'Cartoon'];
   pokemons: any[];
   activeFilter: string = 'id';
   results: any[];
   searchResults: any[] = [];
   dataSource: any[];
+  dropdownExpanded: boolean = false;
 
-  constructor (private pokedexService: PokedexService, private store: Store<{ pagination, pokedex, welcome }>) { };
+  constructor (private pokedexService: PokedexService, private store: Store<{ pagination, pokedex, welcome, card }>) { };
 
   ngOnInit(): void {
     this.getPokemons();
     this.listenToPaginationChanges();
     this.listenToPokedexChanges();
     this.listenToSearchResultsChanges();
+    this.listenToImageTypeChanges();
   }
 
   getPokemons () {
@@ -59,6 +64,18 @@ export class PokedexComponent implements OnInit {
       this.updateDataSource();
 
       if (searchResults) this[`${this.activeFilter}Filter`]();
+    });
+  }
+
+  listenToImageTypeChanges () {
+    this.store.select('card').subscribe(({ imageType }) => {
+      const animationDelayTime = 310;
+      setTimeout(() => {
+        const tempArr = [...this.imageTypes].filter(type => type !== imageType)
+        tempArr.unshift(imageType);
+
+        this.imageTypes = tempArr;
+      }, animationDelayTime);
     });
   }
 
@@ -123,6 +140,15 @@ export class PokedexComponent implements OnInit {
   choosePokemon (pokemon: any): void {
     if (!pokemon) return;
 
+    this.store.dispatch(setChoosenPokemon({ pokemon }));
+  }
 
+  chooseImageType (imageType: string) {
+    if (imageType === this.imageTypes[0]) return;
+    this.store.dispatch(setImageType({ imageType }));
+  }
+
+  toggleDropdown () {
+    this.dropdownExpanded = !this.dropdownExpanded;
   }
 }

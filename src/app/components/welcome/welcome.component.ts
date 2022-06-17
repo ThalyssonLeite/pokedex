@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import { setSearchResults } from './store/welcome.actions';
@@ -9,7 +9,7 @@ import { setRandomPokemon } from './store/welcome.actions';
   templateUrl: './welcome.component.html',
   styleUrls: ['./welcome.component.scss']
 })
-export class WelcomeComponent implements OnInit, OnDestroy {
+export class WelcomeComponent implements OnInit, AfterViewInit, OnDestroy {
   filteredNames: string[];
   names: string[];
   randomPokemon: string;
@@ -20,10 +20,45 @@ export class WelcomeComponent implements OnInit, OnDestroy {
   results: any[];
   resultsListener$: Subscription;
 
-  constructor(private store: Store<{ pokedex, pagination }>) { }
+  @ViewChild('input') input: ElementRef;
+  @ViewChild('submitButton') submitButton: ElementRef;
+
+  constructor(private store: Store<{ pokedex, pagination }>, private renderer: Renderer2 ) {
+
+    //For closing the sugestions when we click outside
+    this.renderer.listen('window', 'click', (e) => {
+      e.stopPropagation();
+
+      if (!e.target.closest('.search-bar')) this.sugestions = [];
+    });
+  }
+
+  ngAfterViewInit(): void {
+    let body;
+
+    //For understand the enter when we search for a name
+    this.input.nativeElement.onfocus = (e) => {
+      e.stopPropagation();
+
+      body = e.target.closest('body');
+
+      body.onkeypress = (e) => {
+        e.stopPropagation();
+
+        if (e.key === 'Enter') this.submitSearch(), this.chooseSugestion();
+      }
+    }
+
+    //For cleaning the body event
+    this.input.nativeElement.onblur = (e) => {
+      e.stopPropagation();
+
+      body.onkeypress = null;
+    }
+  }
 
   ngOnInit(): void {
-    this.pokedexState$ = this.store.select('pokedex').subscribe(({ names, results }) => {
+    this.pokedexState$ = this.store.select('pokedex').subscribe(({ names }) => {
       const filteredNames = [...names].filter(name => !name.includes('-'));
       this.names = names;
       this.filteredNames = filteredNames;
@@ -63,12 +98,15 @@ export class WelcomeComponent implements OnInit, OnDestroy {
       : sugestions;
   }
 
-  chooseSugestion (sugestion: string): void {
+  chooseSugestion (sugestion?: string): void {
     this.sugestions = [];
+
+    if (!sugestion) return;
     this.searchInput = sugestion;
   }
 
-  submitSearch (pokemon: string): any {
+  submitSearch (): any {
+    const pokemon = this.searchInput;
     if (!pokemon) return;
 
     this.searchInput = '';

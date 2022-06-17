@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Renderer2 } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { PokedexService } from 'src/app/services/pokedex.service';
 import { setChoosenPokemon } from '../presentation/store/presentation.actions';
@@ -13,7 +13,7 @@ import {  setFilter, setPokeList, setResults } from './store/pokedex.actions';
 })
 export class PokedexComponent implements OnInit {
 
-  imageTypes: string[] = ['Oficial', 'Pixel art', '3D', 'Cartoon'];
+  imageTypes: string[] = ['Oficial', 'Pixel art', 'Cartoon', '3D'];
   pokemons: any[];
   activeFilter: string = 'id';
   results: any[];
@@ -21,7 +21,13 @@ export class PokedexComponent implements OnInit {
   dataSource: any[];
   dropdownExpanded: boolean = false;
 
-  constructor (private pokedexService: PokedexService, private store: Store<{ pagination, pokedex, welcome, card }>) { };
+  constructor (private pokedexService: PokedexService, private store: Store<{ pagination, pokedex, welcome, card }>, private renderer: Renderer2) {
+    this.renderer.listen('window', 'click', (e) => {
+      e.stopPropagation();
+
+      if (!e.target.closest('.image-type-dropdown-wrapper')) this.dropdownExpanded = false;
+    });
+  };
 
   ngOnInit(): void {
     this.getPokemons();

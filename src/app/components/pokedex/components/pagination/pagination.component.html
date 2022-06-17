@@ -1,6 +1,6 @@
 <div class="pagination-wrapper">
   <div class="go-to-page">
-    <input [(ngModel)]="input" type="text" class="input" placeholder="n°" (input)="formatInput($event)">
+    <input #pageInput [(ngModel)]="input" type="text" class="input" placeholder="n°" (input)="formatInput($event)">
     <div class="go-button" (click)="setActivePage(input)">Ir</div>
   </div>
 

@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import { PaginationLib } from 'src/app/libs/pagination.lib';
@@ -9,13 +9,15 @@ import { updatePagination } from './store/pagination.actions';
   templateUrl: './pagination.component.html',
   styleUrls: ['./pagination.component.scss']
 })
-export class PaginationComponent implements OnInit, OnDestroy {
+export class PaginationComponent implements OnInit, AfterViewInit, OnDestroy {
   paginationLib: PaginationLib;
   items: any[];
   buttons: any[];
   paginationState$: Subscription;
   pokedexState$: Subscription;
   input: any;
+
+  @ViewChild('pageInput') pageInput: ElementRef;
 
   constructor (private store: Store<{ pagination, pokedex }>) {
   }
@@ -39,6 +41,30 @@ export class PaginationComponent implements OnInit, OnDestroy {
         this.buttons = pagination.buttons;
       })
     })
+  }
+
+  ngAfterViewInit(): void {
+    let body;
+
+    //For understand the enter when we search for a name
+    this.pageInput.nativeElement.onfocus = (e) => {
+      e.stopPropagation();
+
+      body = e.target.closest('body');
+
+      body.onkeypress = (e) => {
+        e.stopPropagation();
+
+        if (e.key === 'Enter') this.setActivePage(this.input);
+      }
+    }
+
+    //For cleaning the body event
+    this.pageInput.nativeElement.onblur = (e) => {
+      e.stopPropagation();
+
+      body.onkeypress = null;
+    }
   }
 
   initPaginationLib (inputItems: any[]) {

@@ -2,7 +2,7 @@
   <div class="horizontal-bar">
     <div class="title">Pokédex</div>
 
-    <div *ngIf="searchResults.length" class="clear-search-results margin-left-auto" (click)="resetSearchResults()">
+    <div class="clear-search-results margin-left-auto" *ngIf="searchResults.length" (click)="resetSearchResults()">
       <i class="loop-arrow-icon icon white-filter"></i>
     </div>
 

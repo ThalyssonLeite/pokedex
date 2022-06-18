@@ -11,6 +11,7 @@
   width: 15px;
   height: 15px;
   clip-path: circle();
-  background: #EA686D1A;
+  background: var(--bg);
+  opacity: 0.1;
   pointer-events: none;
 }

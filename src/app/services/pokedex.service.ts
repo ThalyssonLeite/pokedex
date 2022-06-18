@@ -19,6 +19,10 @@ export class PokedexService {
     return this.http.get<any>(typeListUrl);
   }
 
+  getType (url): Observable<any> {
+    return this.http.get<any>(url);
+  }
+
   getPokemon (pokemonUrl): Promise<any> {
     return fetch(pokemonUrl);
   }

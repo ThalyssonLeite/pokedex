@@ -13,6 +13,8 @@ export class PresentationComponent implements OnInit {
   pokemonTypes: any[];
   pokemonStats: any[];
   circleStyle: string;
+  closeButtonColor: string;
+  mainTypeColor: string;
 
   private typeConfig = {
     normal: '#A8A878',
@@ -70,6 +72,8 @@ export class PresentationComponent implements OnInit {
       this.setPokemonTypes();
       this.setCircleColor();
       this.setStatsPercentage();
+      this.setButtonColor();
+      this.setMainTypeColor();
     });
   }
 
@@ -116,6 +120,18 @@ export class PresentationComponent implements OnInit {
     const borderActive = `--border-active: ${hexColor}95`;
 
     this.circleStyle = [bgColor, borderColor, bgActiveColor, borderActive].join('; ');
+  }
+
+  setButtonColor () {
+    const hexColor = this.pokemonTypes[0].style.split(' ')[1];
+
+    const bgColor = `--bg: ${hexColor};`;
+
+    this.closeButtonColor = bgColor;
+  }
+
+  setMainTypeColor () {
+    this.mainTypeColor = this.pokemonTypes[0].style.split(' ')[1];
   }
 
   //Function used in template

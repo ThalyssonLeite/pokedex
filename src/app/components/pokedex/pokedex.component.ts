@@ -60,7 +60,6 @@ export class PokedexComponent implements OnInit {
 
   listenToPaginationChanges () {
     this.store.select('pagination').subscribe(({ pagination }) => {
-      console.log('oia')
       if (!pagination?.items) return;
 
       this.getPokemonsInfo(pagination.items);
@@ -74,12 +73,15 @@ export class PokedexComponent implements OnInit {
   }
 
   listenToSearchResultsChanges () {
-    this.store.select('welcome').subscribe(({ searchResults, randomPokemon }) => {
-      this.searchResults = searchResults;
+    this.store.select('welcome').subscribe(({ searchResults }) => {
+      try {
+        const haveBeenReseted = searchResults[0].length === 0;//an array with empty string
+        this.searchResults = haveBeenReseted ? [] : searchResults;
 
-      this.updateDataSource();
+        this.updateDataSource();
 
-      if (searchResults.length) this[`${this.activeFilter}Filter`]();
+        if (searchResults.length || haveBeenReseted) this[`${this.activeFilter}Filter`]();
+      } catch {}
     });
   }
 
@@ -152,7 +154,7 @@ export class PokedexComponent implements OnInit {
   }
 
   resetSearchResults () {
-    this.store.dispatch(setSearchResults({ searchResults: [] }));
+    this.store.dispatch(setSearchResults({ searchResults: [''] }));
   }
 
   setFirstPokemon (pokemon: any): void {

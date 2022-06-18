@@ -4,11 +4,13 @@ import * as WelcomeActions from './welcome.actions';
 export interface State {
   randomPokemon: string | undefined;
   searchResults: any[];
+  resultType: string | undefined;
 }
 
 export const initialState: State = {
   randomPokemon: undefined,
   searchResults: [],
+  resultType: undefined
 }
 
 export const welcomeReducer = createReducer(
@@ -17,8 +19,12 @@ export const welcomeReducer = createReducer(
     ...state,
       randomPokemon
   })),
-  on(WelcomeActions.setSearchResults, (state, { searchResults: searchResults }) => ({
+  on(WelcomeActions.setSearchResults, (state, { searchResults }) => ({
     ...state,
     searchResults
+  })),
+  on(WelcomeActions.setResultType, (state, { resultType }) => ({
+    ...state,
+    resultType
   })),
 )

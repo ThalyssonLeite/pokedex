@@ -9,12 +9,19 @@
 
     <div class="search-sugestions">
       <div class="sugestions" *ngFor="let sugestion of sugestions">
-        <div class="sugestion" (click)="chooseSugestion(sugestion)">{{ sugestion }}</div>
+        <div class="sugestion" (click)="chooseSugestion(sugestion)">
+          <span *ngIf="!isType(sugestion)">{{ sugestion }}</span>
+          <span class="is-type" *ngIf="isType(sugestion)">Type: <span>{{ sugestion.name }}</span></span>
+        </div>
       </div>
     </div>
   </div>
 
   <div class="pokemon-not-exists" *ngIf="!pokemonExists">
+    *Não encontramos nenhum pokémon com esse nome
+  </div>
+
+  <div class="type-results" *ngIf="typeResultsActive">
     *Não encontramos nenhum pokémon com esse nome
   </div>
 </div>

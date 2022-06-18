@@ -1,7 +1,8 @@
 import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
-import { setSearchResults } from './store/welcome.actions';
+import { PokedexService } from 'src/app/services/pokedex.service';
+import { setResultType, setSearchResults } from './store/welcome.actions';
 import { setRandomPokemon } from './store/welcome.actions';
 
 @Component({
@@ -16,15 +17,16 @@ export class WelcomeComponent implements OnInit, AfterViewInit, OnDestroy {
   randomPokemon: string;
   pokedexState$: Subscription;
   searchInput: string;
-  sugestions: string[];
+  sugestions: any[];
   pokemonExists: boolean = true;
   results: any[];
   resultsListener$: Subscription;
+  typeResultsActive: boolean;
 
   @ViewChild('input') input: ElementRef;
   @ViewChild('submitButton') submitButton: ElementRef;
 
-  constructor(private store: Store<{ pokedex, pagination }>, private renderer: Renderer2 ) {
+  constructor(private store: Store<{ pokedex, welcome }>, private renderer: Renderer2, private pokedexService: PokedexService ) {
     //For closing the sugestions when we click outside
     this.renderer.listen('window', 'click', (e) => {
       e.stopPropagation();
@@ -77,14 +79,20 @@ export class WelcomeComponent implements OnInit, AfterViewInit, OnDestroy {
     this.listenToResults();
   }
 
+  listenToWelcomeChanges () {
+    this.store.select('welcome').subscribe(state => {
+      Boolean(state.searchResults)
+    });
+  }
+
   normalizeTypes (types) {
     return types.map(type => {
       return {
-        sugestion: `Type: ${type.name.slice(0, 1).toUpperCase() + type.name.slice(1)}`,
+        type: true,
         name: type.name,
         url: type.url
       }
-    })
+    }).filter(poke => !(poke.name === 'shadow') && !(poke.name === 'unknown'))
   }
 
   listenToResults () {
@@ -107,41 +115,54 @@ export class WelcomeComponent implements OnInit, AfterViewInit, OnDestroy {
     if (!this.searchInput) return this.sugestions = [];
 
     const formatedInput = this.searchInput.toLocaleLowerCase();
+    const types = this.types.filter(type => type.name.includes(formatedInput));
     const oneWordNames = this.names.filter(name => !name.includes('-'));
     const multiWordNames = this.names.filter(name => name.includes('-'));
-    const sugestions = [
-      ...oneWordNames.filter(name => name.includes(formatedInput)).slice(0, 6),
-      ...multiWordNames.filter(name => name.includes(formatedInput))
-    ].slice(0, 6);
 
-    this.sugestions = sugestions.length === 1 && sugestions[0].length === this.searchInput.length
-      ? []
-      : sugestions;
+    const sugestions = [...[
+      ...oneWordNames.filter(name => name.includes(formatedInput)).slice(0, 5),
+      ...multiWordNames.filter(name => name.includes(formatedInput))
+    ].slice(0, 5), ...types].slice(0, 6);
+
+    this.sugestions = sugestions;
   }
 
-  chooseSugestion (sugestion?: string): void {
+  chooseSugestion (sugestion?: any): void {
     this.sugestions = [];
-
     if (!sugestion) return;
-    this.searchInput = sugestion;
+
+    const checkedSugestion = this.isType(sugestion) ? sugestion.name : sugestion;
+
+    this.searchInput = checkedSugestion;
   }
 
   submitSearch (): any {
     const pokemon = this.searchInput;
     if (!pokemon) return;
 
-    this.searchInput = '';
-
     this.filterAndDispacthSearchList(pokemon);
   }
 
   filterAndDispacthSearchList (pokemon: string): any {
     const pokemonLowerCase = pokemon.toLocaleLowerCase();
-    const pokemonExists = this.names.some(name => name.includes(pokemonLowerCase));
+    const pokemonExists = this.names.some(name => name.includes(pokemonLowerCase)) || this.types.some(pokemon => pokemon.name.includes(pokemonLowerCase));
 
     if (!pokemonExists) return this.pokemonExists = false;
 
+
+    const isType = this.types.find(type => type.name === pokemon);
+
+    if (isType) return this.pokedexService.getType(isType.url).subscribe(res => {
+      this.store.dispatch(setSearchResults({ searchResults: res.pokemon.map(poke => poke.pokemon) }));
+      this.store.dispatch(setResultType({ resultType: isType.name }));
+    })
+
     this.store.dispatch(setSearchResults({ searchResults: this.results.filter(result => result.name.includes(pokemonLowerCase)) }));
+    this.store.dispatch(setResultType({ resultType: undefined }));
+  }
+
+  isType (value) {
+    return typeof value === 'object' ? true : false;
   }
 
   ngOnDestroy(): void {

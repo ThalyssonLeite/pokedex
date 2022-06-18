@@ -31,7 +31,7 @@ b {
     }
 
     & .close-button {
-      box-shadow: 0px 6px 0px 0px #041549, inset 0px 0px 11px 0px rgb(0 0 0 / 60%);
+      box-shadow: 0px 6px 0px 0px #424242, inset 0px 0px 11px 0px rgb(0 0 0 / 60%);
       transform: translateY(-4px);
     }
   }
@@ -270,7 +270,7 @@ b {
 .close-button {
   width: 50px;
   height: 40px;
-  background: #6074f0;
+  background: var(--bg);
   border-radius: 4px;
   z-index: 1;
 

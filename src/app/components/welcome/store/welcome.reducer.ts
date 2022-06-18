@@ -8,9 +8,9 @@ export interface State {
 }
 
 export const initialState: State = {
-  randomPokemon: undefined,
   searchResults: [],
-  resultType: undefined
+  randomPokemon: '',
+  resultType: '',
 }
 
 export const welcomeReducer = createReducer(

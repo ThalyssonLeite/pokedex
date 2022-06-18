@@ -50,6 +50,7 @@
   &::placeholder {
     color: rgba($color: #434961, $alpha: 0.34);
     text-transform: capitalize;
+    user-select: none;
   }
 }
 

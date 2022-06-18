@@ -18,7 +18,7 @@ b {
 
   opacity: 0;
   pointer-events: none;
-  transition: 500ms ease 800ms;
+  transition: 500ms ease 850ms;
 
   &.is-visible {
     pointer-events: auto;
@@ -31,8 +31,8 @@ b {
     }
 
     & .close-button {
-      box-shadow: 0px 6px 0px 0px #424242, inset 0px 0px 11px 0px rgb(0 0 0 / 60%);
-      transform: translateY(-4px);
+      box-shadow: 0px 5px 0px 0px #424242, inset 0px 0px 11px 0px rgb(0 0 0 / 60%);
+      transform: translateY(-5px);
     }
   }
 }
@@ -50,16 +50,16 @@ b {
   font-family: Nunito;
   color: #233674;
 
-  padding: 18px 30px 24px 30px;
+  padding: 24px 30px;
   overflow: hidden;
   position: relative;
   display: flex;
   opacity: 0;
-  transition: 400ms ease 600ms;
+  transition: 400ms ease 650ms;
 }
 
 .presentation__first {
-  flex: 50%;
+  flex: 334px;
   display: flex;
   flex-direction: column;
   gap: 30px;
@@ -82,8 +82,8 @@ b {
 
 .circle {
   content: "";
-  width: 268px;
-  height: 268px;
+  width: 315px;
+  height: 315px;
   border: 4px dashed var(--border);
   background: var(--bg);
   border-radius: 50%;
@@ -118,13 +118,18 @@ b {
 .image {
   z-index: 1;
   pointer-events: none;
-  height: 189px;
-  width: 189px;
+  height: 230px;
+  width: 230px;
 }
 
 .title {
   font: 700 35px Nunito;
   text-transform: capitalize;
+  line-height: 27px;
+  justify-content: space-between;
+  display: flex;
+  flex-direction: row !important;
+  word-break: break-word;
 }
 
 .section {
@@ -133,17 +138,15 @@ b {
   gap: 8px;
 }
 
-.code-and-type {
-  display: flex;
-  align-items: center;
+.types-wrapper {
+  flex-direction: row;
   justify-content: space-between;
-  font: 400 16px Nunito;
 }
 
 .type {
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 5px;
 }
 
 .type__badge {
@@ -154,6 +157,8 @@ b {
   text-transform: capitalize;
   user-select: none;
   transition: 200ms cubic-bezier(.6,.11,.65,1.2);
+  font-weight: 700;
+  text-transform: capitalize;
 
   &:hover {
     filter: brightness(1.1);
@@ -182,7 +187,8 @@ b {
 .stat {
   position: relative;
   display: flex;
-  width: fit-content;
+  justify-content: space-between;
+  width: 100%;
 
   &:hover {
     .stat__color, .stat__name {
@@ -191,7 +197,7 @@ b {
     }
 
     .stat__tooltip {
-      transform: translateX(calc(100% + 6px));
+      transform: translateX(-7px);
       opacity: 1;
     }
   }
@@ -210,6 +216,7 @@ b {
   background: #FBFDFF;
   border-radius: 5px;
   width: 200px;
+  justify-content: flex-end;
   overflow: hidden;
 
   &::after {
@@ -254,7 +261,7 @@ b {
 .stat__tooltip {
   position: absolute;
   top: 0;
-  right: 0;
+  right: 200px;
   height: 100%;
   padding: 0 6px;
   background: #484B4D;
@@ -265,6 +272,7 @@ b {
   will-change: opacity, transform;
   transition: 500ms ease;
   pointer-events: none;
+  transform: translateX(100%);
 }
 
 .close-button {
@@ -279,10 +287,12 @@ b {
   justify-content: center;
   cursor: pointer;
 
-  transition: 300ms cubic-bezier(.6,.11,.65,1.2);
+  transition: 350ms cubic-bezier(.6,.11,.65,1.2);
 
   box-shadow: 0px 0px 0px 0px #041549, inset 0px 0px 5px 1px rgb(0 0 0 / 60%);
   flex-shrink: 0;
+  filter: grayscale(20%) brightness(1.1);
+  position: relative;
 }
 
 .close-button__icon {

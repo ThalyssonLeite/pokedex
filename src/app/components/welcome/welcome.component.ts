@@ -144,20 +144,19 @@ export class WelcomeComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   filterAndDispacthSearchList (pokemon: string): any {
-    const pokemonLowerCase = pokemon.toLocaleLowerCase();
+    const pokemonLowerCase = pokemon.toLowerCase().trim();
     const pokemonExists = this.names.some(name => name.includes(pokemonLowerCase)) || this.types.some(pokemon => pokemon.name.includes(pokemonLowerCase));
 
     if (!pokemonExists) return this.pokemonExists = false;
 
-
-    const isType = this.types.find(type => type.name === pokemon);
+    const isType = this.types.find(type => type.name === pokemonLowerCase);
 
     if (isType) return this.pokedexService.getType(isType.url).subscribe(res => {
       this.store.dispatch(setSearchResults({ searchResults: res.pokemon.map(poke => poke.pokemon) }));
       this.store.dispatch(setResultType({ resultType: isType.name }));
     })
 
-    this.store.dispatch(setSearchResults({ searchResults: this.results.filter(result => result.name.includes(pokemonLowerCase)) }));
+    this.store.dispatch(setSearchResults({ searchResults: this.results.filter(result => result.name.includes(pokemonLowerCase)) || [] }));
     this.store.dispatch(setResultType({ resultType: undefined }));
   }
 

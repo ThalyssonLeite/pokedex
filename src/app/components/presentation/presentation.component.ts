@@ -1,5 +1,6 @@
 import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { PokedexService } from 'src/app/services/pokedex.service';
 import { closePresentation } from './store/presentation.actions';
 
 @Component({
@@ -16,53 +17,17 @@ export class PresentationComponent implements OnInit {
   closeButtonColor: string;
   mainTypeColor: string;
 
-  private typeConfig = {
-    normal: '#A8A878',
-    fire: '#F08030',
-    fighting: '#C03028',
-    water: '#6890F0',
-    flying: '#A890F0',
-    grass: '#78C850',
-    poison: '#A040A0',
-    electric: '#F8D030',
-    ground: '#F8D030',
-    psychic: '#F85888',
-    rock: '#B8A038',
-    ice: '#98D8D8',
-    bug: '#A8B820',
-    dragon: '#7038F8',
-    ghost: '#705898',
-    dark: '#705848',
-    steel: '#B8B8D0',
-    fairy: '#EE99AC',
-    shadow: '#E2E2E2',
-    unknown: '#68A090',
-  }
-
-  private statConfig = {
-    hp: {
-      ceil: 255,
-      color: '#C4F789'
-    },
-    attack: {
-      ceil: 190,
-      color: '#EA686D'
-    },
-    defense: {
-      ceil: 250,
-      color: '#F7802A'
-    },
-    speed: {
-      ceil: 200,
-      color: '#49D0B0'
-    }
-  }
+  private typeConfig: any;
+  private statConfig: any;
 
   @ViewChild('wrapper') wrapper: ElementRef;
 
-  constructor(private store: Store<{ presentation }>, private renderer: Renderer2) { }
+  constructor(private store: Store<{ presentation }>, private renderer: Renderer2, private pokedexService: PokedexService) { }
 
   ngOnInit(): void {
+    this.typeConfig = this.pokedexService.typeConfig;
+    this.statConfig = this.pokedexService.statConfig;
+
     this.store.select('presentation').subscribe(state => {
       if (!Object.keys(state.choosenPokemon).length) return;
 

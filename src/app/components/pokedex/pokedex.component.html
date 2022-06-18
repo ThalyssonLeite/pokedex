@@ -1,32 +1,39 @@
 <div class="pokedex-wrapper">
   <div class="horizontal-bar">
-    <div class="title">Pokédex</div>
-
-    <div class="clear-search-results margin-left-auto" *ngIf="searchResults.length" (click)="resetSearchResults()">
-      <i class="loop-arrow-icon icon white-filter"></i>
+    <div class="horizontal-bar__left">
+      <div class="title">Pokédex</div>
     </div>
 
-    <div class="image-type-dropdown-wrapper" [class.margin-left-auto]="!searchResults.length">
-      <div class="image-type-dropdown" [class.is-expanded]="dropdownExpanded">
-        <div class="image-type" *ngFor="let imageType of imageTypes; let i = index" (click)="chooseImageType(imageType); toggleDropdown()">
-          <div [ngClass]="{ 'margin-left-auto margin-right-auto': i === 0 }">{{ imageType }}</div>
-          <i *ngIf="i === 0" class="triangle-rounded-icon image-type__icon white-filter"></i>
-          <i *ngIf="i === 0" class="spacer-block"></i>
+    <div class="horizontal-bar__right">
+      <div class="search-type" *ngIf="resultType" [style]="searchTypeColor">{{ resultType }}</div>
+
+      <div class="clear-search-results" *ngIf="searchResults.length" (click)="resetSearchResults()">
+        <i class="loop-arrow-icon icon white-filter"></i>
+      </div>
+
+      <div class="image-type-dropdown-wrapper">
+        <div class="image-type-dropdown" [class.is-expanded]="dropdownExpanded">
+          <div class="image-type" *ngFor="let imageType of imageTypes; let i = index" (click)="chooseImageType(imageType); toggleDropdown()">
+            <div [ngClass]="{ 'margin-left-auto margin-right-auto': i === 0 }">{{ imageType }}</div>
+
+            <i *ngIf="i === 0" class="triangle-rounded-icon image-type__icon white-filter"></i>
+
+            <i *ngIf="i === 0" class="spacer-block"></i>
+          </div>
         </div>
       </div>
-    </div>
 
-    <div class="filters">
-      <div class="filter numerical" (click)="setFilter('id')" [class.is-active]="activeFilter === 'id'">
-        0-9
+      <div class="filters">
+        <div class="filter numerical" (click)="setFilter('id')" [class.is-active]="activeFilter === 'id'">
+          0-9
+        </div>
+        <div class="filter alphabetical" (click)="setFilter('name')" [class.is-active]="activeFilter === 'name'">
+          A-z
+        </div>
       </div>
 
-      <div class="filter alphabetical" (click)="setFilter('name')" [class.is-active]="activeFilter === 'name'">
-        A-z
-      </div>
+      <poke-pagination></poke-pagination>
     </div>
-
-    <poke-pagination></poke-pagination>
   </div>
 
   <div class="pokedex">

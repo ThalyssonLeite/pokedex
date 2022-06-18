@@ -20,6 +20,8 @@ export class PokedexComponent implements OnInit {
   searchResults: any[] = [];
   dataSource: any[];
   dropdownExpanded: boolean = false;
+  resultType: string = '';
+  searchTypeColor: string = '';
 
   constructor (private pokedexService: PokedexService, private store: Store<{ pagination, pokedex, welcome, card }>, private renderer: Renderer2) {
     this.renderer.listen('window', 'click', (e) => {
@@ -73,15 +75,19 @@ export class PokedexComponent implements OnInit {
   }
 
   listenToSearchResultsChanges () {
-    this.store.select('welcome').subscribe(({ searchResults }) => {
-      try {
-        const haveBeenReseted = searchResults[0].length === 0;//an array with empty string
-        this.searchResults = haveBeenReseted ? [] : searchResults;
+    this.store.select('welcome').subscribe(({ searchResults, resultType }) => {
+      this.resultType = resultType;
+      if (resultType) this.setSearchTypeColor(resultType);
+      if (!searchResults) return;
 
-        this.updateDataSource();
+      //Stop execution when finding  [], []. At least one should have length. If we let that it will call multiple times the backend.
+      const nonRepetitiveEmptySearchResult = this.searchResults.length || searchResults.length;
 
-        if (searchResults.length || haveBeenReseted) this[`${this.activeFilter}Filter`]();
-      } catch {}
+      this.searchResults = searchResults;
+
+      this.updateDataSource();
+
+      if (nonRepetitiveEmptySearchResult) this[`${this.activeFilter}Filter`]();
     });
   }
 
@@ -154,7 +160,7 @@ export class PokedexComponent implements OnInit {
   }
 
   resetSearchResults () {
-    this.store.dispatch(setSearchResults({ searchResults: [''] }));
+    this.store.dispatch(setSearchResults({ searchResults: [] }));
   }
 
   setFirstPokemon (pokemon: any): void {
@@ -171,5 +177,15 @@ export class PokedexComponent implements OnInit {
 
   toggleDropdown () {
     this.dropdownExpanded = !this.dropdownExpanded;
+  }
+
+  arraysAreEqual (firstArr: any[], secondArr: any[]): boolean {
+    if (firstArr.length !== secondArr.length) return false;
+    return firstArr.some((item, i) => { if (item[i] !== secondArr[i]) return true });
+  }
+
+  setSearchTypeColor (type: string): void {
+    const color = this.pokedexService.typeConfig[type];
+    this.searchTypeColor = `--type-color: ${color}`;
   }
 }

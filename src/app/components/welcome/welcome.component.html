@@ -9,7 +9,7 @@
 
     <div class="search-sugestions">
       <div class="sugestions" *ngFor="let sugestion of sugestions">
-        <div class="sugestion" (click)="chooseSugestion(sugestion)">
+        <div class="sugestion" (click)="chooseSugestion(sugestion)" tabindex="0">
           <span *ngIf="!isType(sugestion)">{{ sugestion }}</span>
           <span class="is-type" *ngIf="isType(sugestion)">Type: <span>{{ sugestion.name }}</span></span>
         </div>

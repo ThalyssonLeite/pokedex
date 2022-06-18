@@ -14,6 +14,11 @@ export class PokedexService {
     return this.http.get<any>(pokeListUrl);
   }
 
+  getTypeList (): Observable<any> {
+    const typeListUrl = 'https://pokeapi.co/api/v2/type?limit=100000&offset=0';
+    return this.http.get<any>(typeListUrl);
+  }
+
   getPokemon (pokemonUrl): Promise<any> {
     return fetch(pokemonUrl);
   }

@@ -11,6 +11,7 @@ import { updatePagination } from './store/pagination.actions';
 })
 export class PaginationComponent implements OnInit, AfterViewInit, OnDestroy {
   paginationLib: PaginationLib;
+  paginationLibLoaded: boolean = false;
   items: any[];
   buttons: any[];
   paginationState$: Subscription;
@@ -26,11 +27,12 @@ export class PaginationComponent implements OnInit, AfterViewInit, OnDestroy {
     const store = this.store;
 
     this.paginationState$ = store.select('pokedex').subscribe(state => {
-      if (!state?.urls) return;
+      if (!state?.urls.length) return;
 
-      this.initPaginationLib(state.urls);
+      this.initPaginationLib(state.urls)
+      this.updateState(this.paginationLib.firstOutput)
 
-      this.updateState(this.paginationLib.firstOutput);
+      // this.updateState({ buttons: state.urls, names: state.names})
 
       if (this.pokedexState$) this.pokedexState$.unsubscribe();
 
@@ -71,6 +73,8 @@ export class PaginationComponent implements OnInit, AfterViewInit, OnDestroy {
     const itemsPerPage = 8;
     const visibleButtons = 5;
     this.paginationLib = new PaginationLib({ inputItems, itemsPerPage, visibleButtons });
+
+    this.paginationLibLoaded = true;
   }
 
   setActivePage (page: number): void {

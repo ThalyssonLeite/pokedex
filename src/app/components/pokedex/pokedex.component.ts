@@ -4,7 +4,7 @@ import { PokedexService } from 'src/app/services/pokedex.service';
 import { setChoosenPokemon, closePresentation } from '../presentation/store/presentation.actions';
 import { setSearchResults } from '../welcome/store/welcome.actions';
 import { setImageType } from './components/card/store/card.actions';
-import {  setFilter, setPokeList, setResults } from './store/pokedex.actions';
+import {  setFilter, setPokeList, setResults, setTypes } from './store/pokedex.actions';
 
 @Component({
   selector: 'poke-pokedex',
@@ -30,6 +30,7 @@ export class PokedexComponent implements OnInit {
   };
 
   ngOnInit(): void {
+    this.getTypes();
     this.getPokemons();
     this.listenToPaginationChanges();
     this.listenToPokedexChanges();
@@ -49,8 +50,17 @@ export class PokedexComponent implements OnInit {
     })
   }
 
+  getTypes () {
+    this.pokedexService
+    .getTypeList()
+    .subscribe(res => {
+      this.store.dispatch(setTypes({ types: res.results }));
+    })
+  }
+
   listenToPaginationChanges () {
     this.store.select('pagination').subscribe(({ pagination }) => {
+      console.log('oia')
       if (!pagination?.items) return;
 
       this.getPokemonsInfo(pagination.items);
@@ -58,18 +68,18 @@ export class PokedexComponent implements OnInit {
   }
 
   listenToPokedexChanges () {
-    this.store.select('pokedex').subscribe(({ filter, searchResults }) => {
-      if (filter && filter !== this.activeFilter) this[`${filter}Filter`]();
+    this.store.select('pokedex').subscribe(({ filter, results }) => {
+      if (filter && filter !== this.activeFilter && results.length) this[`${filter}Filter`]();
     });
   }
 
   listenToSearchResultsChanges () {
-    this.store.select('welcome').subscribe(({ searchResults }) => {
+    this.store.select('welcome').subscribe(({ searchResults, randomPokemon }) => {
       this.searchResults = searchResults;
 
       this.updateDataSource();
 
-      if (searchResults) this[`${this.activeFilter}Filter`]();
+      if (searchResults.length) this[`${this.activeFilter}Filter`]();
     });
   }
 

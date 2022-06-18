@@ -11,6 +11,7 @@ import { setRandomPokemon } from './store/welcome.actions';
 })
 export class WelcomeComponent implements OnInit, AfterViewInit, OnDestroy {
   filteredNames: string[];
+  types: any[] = [];
   names: string[];
   randomPokemon: string;
   pokedexState$: Subscription;
@@ -24,7 +25,6 @@ export class WelcomeComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('submitButton') submitButton: ElementRef;
 
   constructor(private store: Store<{ pokedex, pagination }>, private renderer: Renderer2 ) {
-
     //For closing the sugestions when we click outside
     this.renderer.listen('window', 'click', (e) => {
       e.stopPropagation();
@@ -58,18 +58,33 @@ export class WelcomeComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.pokedexState$ = this.store.select('pokedex').subscribe(({ names }) => {
+    this.pokedexState$ = this.store.select('pokedex').subscribe(({ names, types, results }) => {
       const filteredNames = [...names].filter(name => !name.includes('-'));
       this.names = names;
       this.filteredNames = filteredNames;
       this.randomPokemon = filteredNames[this.genereteRandomNumber(filteredNames.length)];
 
-      this.store.dispatch(setRandomPokemon({ pokemon: this.randomPokemon }))
+      if (!this.types.length) this.types = this.normalizeTypes(types);
 
-      if (this.filteredNames.length) this.ngOnDestroy();
+      if (this.randomPokemon) {
+        this.randomPokemon = filteredNames[this.genereteRandomNumber(filteredNames.length)];
+        this.store.dispatch(setRandomPokemon({ pokemon: this.randomPokemon }));
+      }
+
+      if (this.names.length) this.ngOnDestroy();
     });
 
     this.listenToResults();
+  }
+
+  normalizeTypes (types) {
+    return types.map(type => {
+      return {
+        sugestion: `Type: ${type.name.slice(0, 1).toUpperCase() + type.name.slice(1)}`,
+        name: type.name,
+        url: type.url
+      }
+    })
   }
 
   listenToResults () {

@@ -34,6 +34,7 @@ export class PresentationComponent implements OnInit {
     steel: '#B8B8D0',
     fairy: '#EE99AC',
     shadow: '#E2E2E2',
+    unknown: '#68A090',
   }
 
   private statConfig = {

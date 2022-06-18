@@ -1,7 +1,7 @@
 import { Component, OnInit, Renderer2 } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { PokedexService } from 'src/app/services/pokedex.service';
-import { setChoosenPokemon } from '../presentation/store/presentation.actions';
+import { setChoosenPokemon, closePresentation } from '../presentation/store/presentation.actions';
 import { setSearchResults } from '../welcome/store/welcome.actions';
 import { setImageType } from './components/card/store/card.actions';
 import {  setFilter, setPokeList, setResults } from './store/pokedex.actions';
@@ -14,7 +14,7 @@ import {  setFilter, setPokeList, setResults } from './store/pokedex.actions';
 export class PokedexComponent implements OnInit {
 
   imageTypes: string[] = ['Oficial', 'Pixel art', 'Cartoon', '3D'];
-  pokemons: any[];
+  pokemons: any[] = Array(8);
   activeFilter: string = 'id';
   results: any[];
   searchResults: any[] = [];
@@ -85,11 +85,13 @@ export class PokedexComponent implements OnInit {
     });
   }
 
-  async getPokemonsInfo (pokemonUrlList) {
+  async getPokemonsInfo (pokemonUrlList: string[]): Promise<void> {
+    this.pokemons = Array(pokemonUrlList.length);
     const arrayOfPokemonsResponses = await Promise.all(pokemonUrlList.map(url => this.pokedexService.getPokemon(url)));
     const parsedPromises = await Promise.all(arrayOfPokemonsResponses.map(res => res.json()));
 
     this.pokemons = parsedPromises;
+    this.setFirstPokemon(this.pokemons[0]);
   }
 
   nameFilter () {
@@ -143,10 +145,11 @@ export class PokedexComponent implements OnInit {
     this.store.dispatch(setSearchResults({ searchResults: [] }));
   }
 
-  choosePokemon (pokemon: any): void {
+  setFirstPokemon (pokemon: any): void {
     if (!pokemon) return;
 
     this.store.dispatch(setChoosenPokemon({ pokemon }));
+    this.store.dispatch(closePresentation());
   }
 
   chooseImageType (imageType: string) {

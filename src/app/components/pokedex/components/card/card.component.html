@@ -1,21 +1,42 @@
-<div class="card">
-  <div class="block first">
-    <div class="name">{{ pokemon.name }}</div>
-    <div class="cod">#{{ pokemon.id }}</div>
-  </div>
-  <div class="block second">
-    <img *ngIf="pokemonImage" draggable="false" class="image" [src]="pokemonImage">
-    <div *ngIf="!pokemonImage"class="no-image">SEM IMAGEM</div>
-  </div>
+<div class="card" [class.is-loading]="!pokemon" (click)="choosePokemon()">
+  <ng-container *ngIf="pokemon">
+    <div class="block first">
+      <div class="name">{{ pokemon.name }}</div>
+      <div class="cod">#{{ pokemon.id }}</div>
+    </div>
+    <div class="block second">
+      <img *ngIf="pokemonImage" draggable="false" class="image" [src]="pokemonImage">
+      <div *ngIf="!pokemonImage" class="no-image">SEM IMAGEM</div>
+    </div>
+    <div class="block third">
+      <div class="height stat">
+        <div class="stat__height name">Altura:</div>
+        <div class="stat__height value">{{ pokemon.height / 10}}m</div>
+      </div>
+      <div class="weight stat">
+        <div class="stat__weight name">Peso:</div>
+        <div class="stat__weight value">{{ pokemon.weight / 10}}kg</div>
+      </div>
+    </div>
+  </ng-container>
 
-  <div class="block third">
-    <div class="height stat">
-      <div class="stat__height name">Altura:</div>
-      <div class="stat__height value">{{ pokemon.height / 10}}m</div>
+  <ng-container *ngIf="!pokemon">
+    <div class="block first">
+      <div class="name"></div>
+      <div class="cod"></div>
     </div>
-    <div class="weight stat">
-      <div class="stat__weight name">Peso:</div>
-      <div class="stat__weight value">{{ pokemon.weight / 10}}kg</div>
+    <div class="block second">
+      <div class="image"></div>
     </div>
-  </div>
+    <div class="block third">
+      <div class="height stat">
+        <div class="stat__height name"></div>
+        <div class="stat__height value"></div>
+      </div>
+      <div class="weight stat">
+        <div class="stat__weight name"></div>
+        <div class="stat__weight value"></div>
+      </div>
+    </div>
+  </ng-container>
 </div>

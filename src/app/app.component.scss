@@ -1,9 +1,15 @@
+.app-wrapper {
+  height: 100vh;
+  width: 100vw;
+  overflow: auto;
+}
+
 .poke-wrapper {
   height: 100vh;
   max-width: 1360px;
   margin: auto;
   position: relative;
-  padding: 38px 64px;
+  padding: 50px 64px;
 
   display: flex;
   flex-direction: column;

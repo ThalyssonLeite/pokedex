@@ -1,41 +1,32 @@
-<div class="presentation-wrapper" [class.is-visible]="visible">
-  <div class="presentation">
+<div #wrapper class="presentation-wrapper" [class.is-visible]="visible">
+  <div class="presentation" *ngIf="pokemon">
     <poke-square-shape class="shape right"></poke-square-shape>
     <poke-square-shape class="shape left"></poke-square-shape>
 
     <div class="presentation__first">
       <div class="title section">
-        {{ pokemon.name }}
+        {{ pokemon?.name }} #{{ pokemon?.id }}
+      </div>
 
-        <div class="code-and-type">
-          <div class="code">
-            COD: #{{ pokemon.id }}
-          </div>
-
-          <div class="type">
-            Tipo:
-            <div class="type__badge">
-              {{ pokemon.types[0].type.name }}
-            </div>
+      <div class="types-wrapper section">
+        <b>Tipo</b>
+        <div class="type">
+          <div class="type__badge" *ngFor="let type of pokemonTypes" [style]="type.style">
+            {{ type.name }}
           </div>
         </div>
       </div>
 
 
-      <div class="description section">
-        <b>Descrição:</b>
-        "Charmeleon destrói seus oponentes sem pena com suas garras afiadas. Torna-se agressivo quando encontra um oponente forte e então a chama na ponta da sua cauda queima intensamente em uma cor azulada."
-      </div>
-
       <div class="infos-wrapper section">
         <b>Informações</b>
         <div class="infos">
           <div class="info height">
-            Altura: <span>110cm</span>
+            Altura: <span>{{ pokemon.height / 10}}m</span>
           </div>
 
           <div class="info weight">
-            Peso: <span>19kg</span>
+            Peso: <span>{{ pokemon.weight / 10}}kg</span>
           </div>
         </div>
       </div>
@@ -44,37 +35,23 @@
         <b>Atributos</b>
 
         <div class="stats">
-          <div class="stats__names">
-            <div class="stats__name">HP</div>
-            <div class="stats__name">Defesa</div>
-            <div class="stats__name">Velocidade</div>
-            <div class="stats__name">Ataque</div>
-          </div>
+          <div class="stat" *ngFor="let stat of pokemonStats; let i = index">
+            <div class="stat__name" [class.uppercase]="i === 0">{{ stat.name }}</div>
 
-          <div class="stats__bars">
-            <div class="stats__bar">
-              <div class="stats__color hp"></div>
+            <div class="stat__bar">
+              <div class="stat__color" [style]="stat.style"></div>
             </div>
 
-            <div class="stats__bar">
-              <div class="stats__color defense"></div>
-            </div>
-
-            <div class="stats__bar">
-              <div class="stats__color speed"></div>
-            </div>
-
-            <div class="stats__bar">
-              <div class="stats__color attack"></div>
-            </div>
+            <div class="stat__tooltip">{{ stat.base }}</div>
           </div>
         </div>
       </div>
     </div>
 
     <div class="presentation__second">
-      <div class="circle"></div>
-      <img draggable="false" class="image" src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png">
+      <div *ngIf="!pokemon.image" class="no-image">SEM IMAGEM</div>
+      <img *ngIf="pokemon.image" class="image" draggable="false" [src]="pokemon.image">
+      <div class="circle" [class.is-disabled]="!pokemon.image" [style]="circleStyle"></div>
     </div>
 
     <button class="close-button" (click)="closePresentation()">

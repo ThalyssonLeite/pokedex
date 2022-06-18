@@ -92,7 +92,13 @@ export class WelcomeComponent implements OnInit, AfterViewInit, OnDestroy {
     if (!this.searchInput) return this.sugestions = [];
 
     const formatedInput = this.searchInput.toLocaleLowerCase();
-    const sugestions = this.filteredNames.filter(name => name.startsWith(formatedInput)).slice(0, 6);
+    const oneWordNames = this.names.filter(name => !name.includes('-'));
+    const multiWordNames = this.names.filter(name => name.includes('-'));
+    const sugestions = [
+      ...oneWordNames.filter(name => name.includes(formatedInput)).slice(0, 6),
+      ...multiWordNames.filter(name => name.includes(formatedInput))
+    ].slice(0, 6);
+
     this.sugestions = sugestions.length === 1 && sugestions[0].length === this.searchInput.length
       ? []
       : sugestions;
@@ -116,11 +122,11 @@ export class WelcomeComponent implements OnInit, AfterViewInit, OnDestroy {
 
   filterAndDispacthSearchList (pokemon: string): any {
     const pokemonLowerCase = pokemon.toLocaleLowerCase();
-    const pokemonExists = this.names.some(name => name.startsWith(pokemonLowerCase));
+    const pokemonExists = this.names.some(name => name.includes(pokemonLowerCase));
 
     if (!pokemonExists) return this.pokemonExists = false;
 
-    this.store.dispatch(setSearchResults({ searchResults: this.results.filter(result => result.name.startsWith(pokemonLowerCase)) }));
+    this.store.dispatch(setSearchResults({ searchResults: this.results.filter(result => result.name.includes(pokemonLowerCase)) }));
   }
 
   ngOnDestroy(): void {

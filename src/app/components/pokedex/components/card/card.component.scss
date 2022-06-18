@@ -1,3 +1,5 @@
+@import '../../../../../styles/_utility';
+
 .card {
   position: relative;
   overflow: hidden;
@@ -22,6 +24,55 @@
   }
 
   transition: 150ms cubic-bezier(.6,.11,.65,1.2);
+
+  &.is-loading {
+    opacity: 0;
+    animation: opacityDelay 0ms 80ms forwards;
+
+    .name {
+      @extend .loading-background;
+      width: 110px;
+      height: 25px;
+      border-radius: 6px;
+    }
+
+    .cod, .value {
+      @extend .loading-background;
+      width: 50px;
+      height: 25px;
+      border-radius: 6px;
+    }
+
+    .stat__height.name {
+      width: 90px;
+    }
+
+    .stat__weight.name {
+      width: 60px;
+    }
+
+    .stat__height.value {
+      width: 60px;
+    }
+
+    .stat__weight.value {
+      width: 65px;
+    }
+
+    .block.third {
+      gap: 8px;
+    }
+
+    .image {
+      @extend .loading-background;
+      border-radius: 50%;
+    }
+  }
+}
+
+@keyframes opacityDelay {
+  0% { opacity: 0 }
+  100% {opacity: 1 }
 }
 
 .name {
@@ -56,8 +107,4 @@
 
 .name {
   font: 700 16px Nunito;
-}
-
-.no-image {
-  font: 700 25px Nunito;
 }

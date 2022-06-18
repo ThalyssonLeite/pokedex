@@ -21,3 +21,37 @@
   height: 100vh;
   width: 100vw;
 }
+
+.loading-background {
+  --grey: #e3e3e3;
+  --white: #fff;
+  --gradient: linear-gradient(
+    270deg,
+    var(--grey),
+    var(--white),
+    var(--grey),
+    var(--white),
+    var(--grey),
+    var(--white),
+    var(--grey)
+  );
+
+  background: var(--gradient);
+  background-size: 300%;
+  background-position: left;
+  animation: animateBG 1.5s linear infinite reverse;
+}
+
+@keyframes animateBG {
+  0% { background-position: left }
+  100% { background-position: right }
+}
+
+.no-image {
+  font: 700 25px Nunito;
+  z-index: 1;
+}
+
+.uppercase {
+  text-transform: uppercase !important;
+}

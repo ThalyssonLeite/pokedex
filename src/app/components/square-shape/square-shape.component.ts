@@ -7,16 +7,16 @@ import { Component, Input, OnChanges, OnInit } from '@angular/core';
 })
 export class SquareShapeComponent implements OnInit, OnChanges {
   shapeBalls = Array(36);
-  @Input() color: string = '#EA686D';
+  @Input() color: string;
   bgStyle: string;
 
-  constructor () {}
+  constructor() { }
 
   ngOnInit(): void {
     this.ngOnChanges();
   }
 
-  ngOnChanges () {
-    if (this.color) this.bgStyle = `--bg: ${this.color}`;
+  ngOnChanges() {
+    if (this.color) this.bgStyle = `--square-shape: ${this.color}`;
   }
 }

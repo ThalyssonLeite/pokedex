@@ -1,7 +1,6 @@
 <div #wrapper class="presentation-wrapper" [class.is-visible]="visible">
   <div class="presentation" *ngIf="pokemon">
-    <poke-square-shape class="shape right" [color]="mainTypeColor"></poke-square-shape>
-    <poke-square-shape class="shape left" [color]="mainTypeColor"></poke-square-shape>
+
 
     <div class="presentation__first">
       <div class="title section">
@@ -57,5 +56,8 @@
     <button class="close-button" (click)="closePresentation()" [style]="closeButtonColor">
       <div class="close-button__icon close-icon white-filter"></div>
     </button>
+
+    <poke-square-shape class="shape right" [color]="mainTypeColor"></poke-square-shape>
+    <poke-square-shape class="shape left" [color]="mainTypeColor"></poke-square-shape>
   </div>
 </div>

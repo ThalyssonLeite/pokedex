@@ -1,0 +1,11 @@
+<div class="themes-wrapper">
+  <div class="themes" [class.is-expanded]="themeDropdownExpanded">
+    <div class="theme" *ngFor="let theme of themes; let i = index" (click)="chooseTheme(theme); toggleDropdown('theme')">
+      <div [ngClass]="{ 'margin-left-auto margin-right-auto': i === 0 }">{{ theme }}</div>
+
+      <i *ngIf="i === 0" class="triangle-rounded-icon theme__icon white-filter"></i>
+
+      <i *ngIf="i === 0" class="spacer-block"></i>
+    </div>
+  </div>
+</div>

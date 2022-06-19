@@ -2,6 +2,13 @@
   height: 100vh;
   width: 100vw;
   overflow: auto;
+  --bg-linear-gradient: linear-gradient(180deg, #EFF4FA 0%, rgba(239, 244, 250, 0) 102.84%) no-repeat;
+
+  &.dark-theme {
+    --bg-linear-gradient: linear-gradient(180deg, #1e3d63 0%, rgb(0 0 0) 102.84%) no-repeat;
+  }
+
+  background: var(--bg-linear-gradient);
 }
 
 .poke-wrapper {
@@ -9,7 +16,7 @@
   max-width: 1360px;
   margin: auto;
   position: relative;
-  padding: 50px 64px;
+  padding: 30px 64px 50px 64px;
 
   display: flex;
   flex-direction: column;

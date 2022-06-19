@@ -140,6 +140,8 @@ export class WelcomeComponent implements OnInit, AfterViewInit, OnDestroy {
     const pokemon = this.searchInput;
     if (!pokemon) return;
 
+    this.searchInput = '';
+
     this.filterAndDispacthSearchList(pokemon);
   }
 

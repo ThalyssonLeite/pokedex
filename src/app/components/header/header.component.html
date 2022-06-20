@@ -3,7 +3,7 @@
     <div class="theme item" *ngFor="let theme of themes; let i = index" (click)="chooseTheme(theme); toggleDropdown('theme')">
       <div [ngClass]="{ 'margin-left-auto margin-right-auto': i === 0 }">{{ translationService.translations[theme] }}</div>
 
-      <i *ngIf="i === 0" class="triangle-rounded-icon dropdown__icon white-filter"></i>
+      <i *ngIf="i === 0" class="sun-fill-icon dropdown__icon white-filter"></i>
 
       <i *ngIf="i === 0" class="spacer-block"></i>
     </div>
@@ -15,7 +15,7 @@
     <div class="language item" *ngFor="let language of languages; let i = index" (click)="chooseLanguage(language); toggleDropdown('language')">
       <div [ngClass]="{ 'margin-left-auto margin-right-auto': i === 0 }">{{ translationService.translations[language] }}</div>
 
-      <i *ngIf="i === 0" class="triangle-rounded-icon dropdown__icon white-filter"></i>
+      <i *ngIf="i === 0" class="globe-fill-icon dropdown__icon white-filter"></i>
 
       <i *ngIf="i === 0" class="spacer-block"></i>
     </div>

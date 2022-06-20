@@ -23,17 +23,15 @@
 }
 
 .loading-background {
-  --grey: #e3e3e3;
-  --white: #fff;
   --gradient: linear-gradient(
     270deg,
-    var(--grey),
-    var(--white),
-    var(--grey),
-    var(--white),
-    var(--grey),
-    var(--white),
-    var(--grey)
+    var(--linear-gradient-darker),
+    var(--linear-gradient-lighter),
+    var(--linear-gradient-darker),
+    var(--linear-gradient-lighter),
+    var(--linear-gradient-darker),
+    var(--linear-gradient-lighter),
+    var(--linear-gradient-darker)
   );
 
   background: var(--gradient);

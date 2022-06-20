@@ -7,7 +7,7 @@
     <input #input type="text" class="search-bar__input" [attr.placeholder]="randomPokemon" [(ngModel)]="searchInput" (input)="generateSugestions()" spellcheck="false">
     <div #submitButton class="search-bar__button" (click)="submitSearch(); chooseSugestion(searchInput)">Buscar</div>
 
-    <div class="search-sugestions">
+    <div class="search-sugestions" [class.empty]="!sugestions || (sugestions && !sugestions.length)">
       <div class="sugestions" *ngFor="let sugestion of sugestions">
         <div class="sugestion" (click)="chooseSugestion(sugestion)" tabindex="0">
           <span *ngIf="!isType(sugestion)">{{ sugestion }}</span>

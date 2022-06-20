@@ -9,8 +9,10 @@
       <i class="fallen-v-arrow-icon pagination__icon left white-filter"></i>
     </div>
 
-    <div class="pagination__button z-index" *ngFor="let button of buttons" [class.is-active]="button.active" (click)="setActivePage(button.number)">
-      {{ button.number }}
+    <div class="pagination__buttons">
+      <div class="pagination__button z-index" *ngFor="let button of buttons" [class.is-active]="button.active" (click)="setActivePage(button.number)">
+        {{ button.number }}
+      </div>
     </div>
 
     <div class="pagination__arrow right" (click)="forward()">

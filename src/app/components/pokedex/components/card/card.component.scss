@@ -7,19 +7,20 @@
   will-change: transform;
   width: 284px;
   height: 320px;
-  background: #fff;
+  background: var(--card-bg);
   padding: 16px 18px;
-  color: #233674;
-  box-shadow: 0px 4px 15px rgba(47, 62, 119, 0.1);
+  color: var(--text-color);
+  box-shadow: 0px 4px 15px var(--card-shadow);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   font-family: Nunito;
+  animation: opacityDelay 200ms ease forwards;
 
   &:hover {
-    filter: brightness(0.975) contrast(1.01);
+    filter: var(--highlight-filter) contrast(1.01);
     transform: translate3d(0, -15px, 0);
-    box-shadow: 0px 15px 15px rgba(47, 62, 119, 0.1);
+    box-shadow: 0px 15px 15px var(--card-shadow);
     cursor: pointer;
   }
 
@@ -27,7 +28,7 @@
 
   &.is-loading {
     opacity: 0;
-    animation: opacityDelay 0ms 80ms forwards;
+    animation: opacityDelay 0ms 280ms forwards;
 
     .name {
       @extend .loading-background;

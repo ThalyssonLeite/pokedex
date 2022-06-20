@@ -9,19 +9,19 @@
 
 .title {
   font: 600 55px Nunito;
-  color: #2F3E77;
+  color: var(--text-color);
   line-height: 60px;
 
   & > span {
-    color: #EA686D;
+    color: var(--highlight);
     font-weight: 700;
-    text-shadow: 1px 1px 14px rgba($color: #ea686d, $alpha: 0.2);
+    text-shadow: 1px 1px 14px var(--highlight-shadow);
   }
 }
 
 .description {
   font: 400 25px Nunito;
-  color: #2F3E77;
+  color: var(--text-color);
 }
 
 .search-bar {
@@ -36,19 +36,19 @@
   border: none;
   width: 100%;
 
-  background: #fff;
-  border: 1px solid #F4F4F4;
+  background: var(--input-bg);
+  border: 1px solid var(--main-search-input-border);
   box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.15);
   border-radius: 5px 0px 0px 5px;
 
   padding: 0 16px;
-  color: rgba($color: #434961, $alpha: 0.7);
+  color: var(--input-color);
   font-size: 25px;
   z-index: 2;
   text-transform: capitalize;
 
   &::placeholder {
-    color: rgba($color: #434961, $alpha: 0.34);
+    color: var(--placeholder);
     text-transform: capitalize;
     user-select: none;
   }
@@ -58,7 +58,7 @@
   cursor: pointer;
   user-select: none;
 
-  background: #EA686D;
+  background: var(--title);
   font: 700 22px Nunito;
   color: #fff;
 
@@ -67,7 +67,7 @@
   align-items: center;
   min-width: 106px;
 
-  box-shadow: 0px 4px 15px #EA686D;
+  box-shadow: 0px 4px 15px -3px var(--highlight-shadow);
   border-radius: 0px 5px 5px 0px;
 
   z-index: 1;
@@ -86,22 +86,26 @@
 .search-sugestions {
   position: absolute;
 
-  top: calc(100% - 3px);
+  top: calc(100% - 4px);
   left: 0;
   width: calc(100% - 106px);
-  background: #fff;
+  background: var(--input-bg);
   z-index: 3;
 
   box-shadow: 0px 9px 16px -10px rgb(0 0 0 / 15%), 6px 0px 10px -10px rgb(0 0 0 / 15%), -6px 0px 10px -10px rgb(0 0 0 / 15%);
   border-radius: 0px 0px 5px 5px;
   overflow: hidden;
+
+  &.empty {
+    border: none;
+  }
 }
 
 .sugestion {
-  color: rgba($color: #434961, $alpha: 0.7);
+  color: var(--input-color);
   font-size: 25px;
   padding: 0 16px;
-  background: #fff;
+  background: var(--input-bg);
 
   cursor: pointer;
   transition: 100ms ease;
@@ -111,6 +115,10 @@
   }
 
   text-transform: capitalize;
+
+  &:last-child {
+    padding: 0 16px 3px 16px;
+  }
 }
 
 .pokemon-not-exists {
@@ -122,9 +130,9 @@
 
 .is-type {
   font-weight: 600;
-  color: #EA686D;
+  color: var(--title);
 
   & > * {
-    color: rgba($color: #434961, $alpha: 0.7);
+    color: var(--input-color);
   }
 }

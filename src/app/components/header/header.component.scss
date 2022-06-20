@@ -36,7 +36,7 @@
   &::after {
     content: "";
     position: absolute;
-    box-shadow: inset 0px 0px 0px 2px #EA686D;
+    box-shadow: inset 0px 0px 0px 2px var(--title);
     top: 0;
     left: 0;
     width: 100%;
@@ -54,14 +54,14 @@
   width: 100%;
   padding: 5px 0px;
   font: 700 16px Nunito;
-  color: #EA686D;
+  color: var(--title);
   user-select: none;
   transition: all 300ms cubic-bezier(.6,.11,.65,1.2);
   background: #fff;
 
 
   &:first-child {
-    background: #EA686D;
+    background: var(--title);
     color: #fff;
 
     &:hover {

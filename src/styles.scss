@@ -9,24 +9,59 @@
   border: 0;
 }
 
-/* SCROLLBAR */
-/* width */
-::-webkit-scrollbar {
-  width: 8px;
-}
+body {
+  overflow: hidden;
 
-/* Track */
-::-webkit-scrollbar-track {
-  background: #f1f1f1;
-}
+    /* VARIABLES */
+    --bg-linear-gradient: linear-gradient(180deg, #EFF4FA 0%, rgba(239, 244, 250, 0) 102.84%) no-repeat;
+    --square-shape: #ea686d;
+    --text-color: #2f3e77;
+    --highlight: #ea686d;
+    --highlight-shadow: #ea686d33;
+    --title: #ea686d;
+    --contrast-text-fill: #fff;
+    --placeholder: #42486157;
+    --main-search-input-border: #F4F4F4;
+    --input-bg: #fff;
+    --input-color: #434961b3;
+    --highlight-filter: brightness(0.975);
+    --card-bg: #fff;
+    --card-shadow: #2f3e771a;
+    --linear-gradient-lighter: #fff;
+    --linear-gradient-darker: #e3e3e3;
+    --presentation-bg: #ffffffde;
+    --stat-bar: #FBFDFF;
+    --tooltip-bg: #484B4D;
+    --tooltip-text: #fff;
+    --button-depth: #424242;
 
-/* Handle */
-::-webkit-scrollbar-thumb {
-  background: #888;
-}
+    &.dark-theme {
+      --bg-linear-gradient: linear-gradient(180deg, #1e3d63 0%, rgb(0 0 0) 102.84%) no-repeat;
+      --square-shape: #fff;
+      --text-color: #fff;
+      --highlight: #22fff5;
+      --highlight-shadow: #22fff56b;
+      --contrast-text-fill: #2f3e77;
+      --title: #1ab6b5;
+      --placeholder: #ffffff4a;
+      --main-search-input-border: var(--title);
+      --input-bg: #272d38;
+      --input-color: #ececed;
+      --input-border: var(--title);
+      --highlight-filter: brightness(1.15);
+      --card-bg: #474c53;
+      --card-shadow: #00000099;
+      --linear-gradient-lighter: #a6a6a6;
+      --linear-gradient-darker: #414141;
+      --presentation-bg: #272d38de;
+      --stat-bar: #787b82;
+      --tooltip-bg: #fff;
+      --tooltip-text: #484B4D;
+      --button-depth: #2a2a2a;
+    }
 
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-  background: #555;
+    &.dark-theme .search-sugestions {
+      border: 1px solid var(--main-search-input-border);
+      border-width: 0px 1px 1px 1px;
+    }
 }
-

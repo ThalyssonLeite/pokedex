@@ -4,20 +4,27 @@
   overflow: auto;
   background: var(--bg-linear-gradient);
 
-  /* VARIABLES */
-  --bg-linear-gradient: linear-gradient(180deg, #EFF4FA 0%, rgba(239, 244, 250, 0) 102.84%) no-repeat;
-  --square-shape: #ea686d;
-  --text-color: #2f3e77;
-
-  &.dark-theme {
-    --bg-linear-gradient: linear-gradient(180deg, #1e3d63 0%, rgb(0 0 0) 102.84%) no-repeat;
-    --square-shape: #fff;
-    --text-color: #fff;
-    --highlight: #22fff5cf;
-    --highlight-shadow: #22fff56b;
-
+  /* SCROLLBAR */
+  /* width */
+  &::-webkit-scrollbar {
+    width: 8px;
   }
 
+  /* Track */
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  /* Handle */
+  &::-webkit-scrollbar-thumb {
+    background: var(--title);
+    opacity: 0.3;
+  }
+
+  /* Handle on hover */
+  &::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
 }
 
 .poke-wrapper {
@@ -25,7 +32,7 @@
   max-width: 1360px;
   margin: auto;
   position: relative;
-  padding: 30px 64px 50px 64px;
+  padding: 25px 64px 50px 64px;
 
   display: flex;
   flex-direction: column;

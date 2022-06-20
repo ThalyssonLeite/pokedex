@@ -2,6 +2,7 @@ import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, Renderer2, Vie
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import { PokedexService } from 'src/app/services/pokedex.service';
+import { TranslationService } from 'src/app/services/translation.service';
 import { setResultType, setSearchResults } from './store/welcome.actions';
 import { setRandomPokemon } from './store/welcome.actions';
 
@@ -22,11 +23,17 @@ export class WelcomeComponent implements OnInit, AfterViewInit, OnDestroy {
   results: any[];
   resultsListener$: Subscription;
   typeResultsActive: boolean;
+  i18n: any;
 
   @ViewChild('input') input: ElementRef;
   @ViewChild('submitButton') submitButton: ElementRef;
 
-  constructor(private store: Store<{ pokedex, welcome }>, private renderer: Renderer2, private pokedexService: PokedexService ) {
+  constructor(
+    private store: Store<{ pokedex, welcome }>,
+    private renderer: Renderer2,
+    private pokedexService: PokedexService,
+    public translationService: TranslationService
+  ) {
     //For closing the sugestions when we click outside
     this.renderer.listen('window', 'click', (e) => {
       e.stopPropagation();

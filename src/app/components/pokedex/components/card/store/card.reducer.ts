@@ -6,7 +6,7 @@ export interface State {
 }
 
 export const initialState: State = {
-  imageType: 'Oficial',
+  imageType: 'official',
 }
 
 export const cardReducer = createReducer(

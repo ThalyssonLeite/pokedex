@@ -1,6 +1,7 @@
 import { Component, ElementRef, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { setChoosenPokemon } from 'src/app/components/presentation/store/presentation.actions';
+import { TranslationService } from 'src/app/services/translation.service';
 
 @Component({
   selector: 'poke-card',
@@ -10,29 +11,47 @@ import { setChoosenPokemon } from 'src/app/components/presentation/store/present
 export class CardComponent implements OnInit, OnChanges {
   @Input() pokemon;
   pokemonImage: string;
+  height: string;
+  weight: string;
 
   @ViewChild('image') image: ElementRef
 
-  constructor(private store: Store<{ card }>) {}
+  constructor(private store: Store<{ card, header }>, public translationService: TranslationService) {}
 
   imageConfig = {
-    'oficial': 'official-artwork',
+    'official': 'official-artwork',
     '3d': 'home',
     'cartoon': 'dream_world',
-    'pixel art': 'pixel art'
+    'pixel_art': 'pixel_art'
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
+  ngOnChanges(): void {
     this.normalizeBugs();
+    this.listenToHeaderState();
   }
 
   ngOnInit(): void {
+    this.listenToCardsState();
+  }
+
+  listenToCardsState () {
     this.store.select('card').subscribe(({ imageType }) => {
       if (!this.pokemon) return;
-      const type = this.imageConfig[imageType.toLowerCase()];
+      const type = this.imageConfig[imageType];
 
-      if (type === 'pixel art') return this.pokemonImage = this.pokemon.sprites.front_default;
+      if (type === 'pixel_art') return this.pokemonImage = this.pokemon.sprites.front_default;
       else this.pokemonImage = this.pokemon.sprites.other[type].front_default;
+    });
+  }
+
+  listenToHeaderState () {
+    this.store.select('header').subscribe(({ language }) => {
+      if (!this.pokemon) return;
+
+      const isEnglish = language !== 'en';
+
+      this.height = isEnglish ? `${this.pokemon.weight / 10}kg` : `${(this.pokemon.weight * 0.220462).toFixed(1)}lb`;
+      this.weight = isEnglish ? `${this.pokemon.weight / 10}m` : `${(this.pokemon.height * 0.3280839895).toFixed(1)}ft`;
     });
   }
 

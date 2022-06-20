@@ -34,6 +34,7 @@ body {
     --tooltip-bg: #484B4D;
     --tooltip-text: #fff;
     --button-depth: #424242;
+    --theme-oposite-color: #1ab6b5;
 
     &.dark-theme {
       --bg-linear-gradient: linear-gradient(180deg, #1e3d63 0%, rgb(0 0 0) 102.84%) no-repeat;
@@ -58,10 +59,16 @@ body {
       --tooltip-bg: #fff;
       --tooltip-text: #484B4D;
       --button-depth: #2a2a2a;
+      --theme-oposite-color: #ea686d;
     }
 
     &.dark-theme .search-sugestions {
       border: 1px solid var(--main-search-input-border);
       border-width: 0px 1px 1px 1px;
+    }
+
+    ::selection {
+      color: var(--theme-oposite-color);
+      background: transparent;
     }
 }

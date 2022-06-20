@@ -14,7 +14,7 @@
       <div class="image-type-dropdown-wrapper">
         <div class="image-type-dropdown" [class.is-expanded]="dropdownExpanded">
           <div class="image-type" *ngFor="let imageType of imageTypes; let i = index" (click)="chooseImageType(imageType); toggleDropdown()">
-            <div [ngClass]="{ 'margin-left-auto margin-right-auto': i === 0 }">{{ imageType }}</div>
+            <div [ngClass]="{ 'margin-left-auto margin-right-auto': i === 0 }">{{ translationService.translations[imageType] }}</div>
 
             <i *ngIf="i === 0" class="triangle-rounded-icon image-type__icon white-filter"></i>
 

@@ -156,7 +156,6 @@ b {
   color: #fff;
   border-radius: 3px;
   text-transform: capitalize;
-  user-select: none;
   transition: 200ms cubic-bezier(.6,.11,.65,1.2);
   font-weight: 700;
   text-transform: capitalize;
@@ -219,6 +218,7 @@ b {
   width: 200px;
   justify-content: flex-end;
   overflow: hidden;
+  z-index: 1;
 
   &::after {
     content: "";

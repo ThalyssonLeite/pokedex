@@ -3,6 +3,7 @@ import { cardReducer as card } from "../components/pokedex/components/card/store
 import { pokedexReducer as pokedex } from "../components/pokedex/store/pokedex.reducer";
 import { welcomeReducer as welcome } from "../components/welcome/store/welcome.reducer";
 import { presentationReducer as presentation } from "../components/presentation/store/presentation.reducer";
+import { headerReducer as header } from "../components/header/store/header.reducer";
 
 export const appReducers = {
   pagination,
@@ -10,4 +11,5 @@ export const appReducers = {
   welcome,
   presentation,
   card,
+  header,
 }

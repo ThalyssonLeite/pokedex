@@ -111,7 +111,7 @@
   transition: 100ms ease;
 
   &:hover {
-    filter: brightness(0.97);
+    filter: var(--highlight-filter);
   }
 
   text-transform: capitalize;

@@ -8,7 +8,7 @@
       </div>
 
       <div class="types-wrapper section">
-        <b>Tipo</b>
+        <b>{{ translationService.translations.type }}</b>
         <div class="type">
           <div class="type__badge" *ngFor="let type of pokemonTypes" [style]="type.style">
             {{ type.name }}
@@ -18,24 +18,24 @@
 
 
       <div class="infos-wrapper section">
-        <b>Informações</b>
+        <b>{{ translationService.translations.informations }}</b>
         <div class="infos">
           <div class="info height">
-            Altura: <span>{{ pokemon.height / 10}}m</span>
+            {{ translationService.translations.height }}: <span>{{ height }}</span>
           </div>
 
           <div class="info weight">
-            Peso: <span>{{ pokemon.weight / 10}}kg</span>
+            {{ translationService.translations.weight }}: <span>{{ weight }}</span>
           </div>
         </div>
       </div>
 
       <div class="stats-wrapper section">
-        <b>Atributos</b>
+        <b>{{ translationService.translations.stats }}</b>
 
         <div class="stats">
           <div class="stat" *ngFor="let stat of pokemonStats; let i = index">
-            <div class="stat__name" [class.uppercase]="i === 0">{{ stat.name }}</div>
+            <div class="stat__name" [class.uppercase]="i === 0">{{ translationService.translations[stat.name] }}</div>
 
             <div class="stat__bar">
               <div class="stat__color" [style]="stat.style"></div>
@@ -48,7 +48,7 @@
     </div>
 
     <div class="presentation__second">
-      <div *ngIf="!pokemon.image" class="no-image">SEM IMAGEM</div>
+      <div *ngIf="!pokemon.image" class="no-image">{{ translationService.translations.no_image }}</div>
       <img *ngIf="pokemon.image" class="image" draggable="false" [src]="pokemon.image">
       <div class="circle" [class.is-disabled]="!pokemon.image" [style]="circleStyle"></div>
     </div>

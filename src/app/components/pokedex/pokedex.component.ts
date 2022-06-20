@@ -1,6 +1,7 @@
 import { Component, OnInit, Renderer2 } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { PokedexService } from 'src/app/services/pokedex.service';
+import { TranslationService } from 'src/app/services/translation.service';
 import { setChoosenPokemon, closePresentation } from '../presentation/store/presentation.actions';
 import { setSearchResults } from '../welcome/store/welcome.actions';
 import { setImageType } from './components/card/store/card.actions';
@@ -13,7 +14,7 @@ import {  setFilter, setPokeList, setResults, setTypes } from './store/pokedex.a
 })
 export class PokedexComponent implements OnInit {
 
-  imageTypes: string[] = ['Oficial', 'Pixel art', 'Cartoon', '3D'];
+  imageTypes: string[] = ['official', 'pixel_art', 'cartoon', '3d'];
   pokemons: any[] = Array(8);
   activeFilter: string = 'id';
   results: any[];
@@ -23,7 +24,12 @@ export class PokedexComponent implements OnInit {
   resultType: string = '';
   searchTypeColor: string = '';
 
-  constructor (private pokedexService: PokedexService, private store: Store<{ pagination, pokedex, welcome, card }>, private renderer: Renderer2) {
+  constructor (
+    private pokedexService: PokedexService,
+    private store: Store<{ pagination, pokedex, welcome, card }>,
+    private renderer: Renderer2,
+    public translationService: TranslationService
+  ) {
     this.renderer.listen('window', 'click', (e) => {
       e.stopPropagation();
 
@@ -94,11 +100,11 @@ export class PokedexComponent implements OnInit {
   listenToImageTypeChanges () {
     this.store.select('card').subscribe(({ imageType }) => {
       const animationDelayTime = 310;
-      setTimeout(() => {
-        const tempArr = [...this.imageTypes].filter(type => type !== imageType)
-        tempArr.unshift(imageType);
 
-        this.imageTypes = tempArr;
+      setTimeout(() => {
+        const tempArr = [...this.imageTypes].filter(type => type !== imageType);
+
+        this.imageTypes = [imageType, ...tempArr];
       }, animationDelayTime);
     });
   }

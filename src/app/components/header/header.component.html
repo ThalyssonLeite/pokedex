@@ -1,5 +1,5 @@
 <div class="themes-wrapper wrapper">
-  <div class="themes dropdown" [class.is-expanded]="themeDropdownExpanded">
+  <div class="themes dropdown z-index" [class.is-expanded]="themeDropdownExpanded">
     <div class="theme item" *ngFor="let theme of themes; let i = index" (click)="chooseTheme(theme); toggleDropdown('theme')">
       <div [ngClass]="{ 'margin-left-auto margin-right-auto': i === 0 }">{{ translationService.translations[theme] }}</div>
 

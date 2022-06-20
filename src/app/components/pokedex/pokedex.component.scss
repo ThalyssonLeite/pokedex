@@ -16,6 +16,13 @@
   justify-content: flex-end;
 }
 
+.horizontal-bar__left {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
 .title {
   font: 700 30px Nunito;
   color: var(--title);
@@ -23,6 +30,7 @@
 
 .pokedex {
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
   gap: 32px;
 }
@@ -189,5 +197,36 @@
 
   &:hover {
     filter: brightness(1.15);
+  }
+}
+
+/* RESPONSIVE */
+.desktop {
+  display: inherit;
+}
+
+.mobile {
+  display: none;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+@media (max-width: 1368px) {
+  .horizontal-bar__left {
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  .horizontal-bar {
+    justify-content: center;
+  }
+
+  .desktop {
+    display: none;
+  }
+
+  .mobile {
+    display: flex;
   }
 }

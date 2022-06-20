@@ -1,63 +1,66 @@
 <div #wrapper class="presentation-wrapper" [class.is-visible]="visible">
   <div class="presentation" *ngIf="pokemon">
-
-
     <div class="presentation__first">
       <div class="title section">
         {{ pokemon?.name }} <span class="nowrap">#{{ pokemon?.id }}</span>
       </div>
-
-      <div class="types-wrapper section">
-        <b>{{ translationService.translations.type }}</b>
-        <div class="type">
-          <div class="type__badge" *ngFor="let type of pokemonTypes" [style]="type.style">
-            {{ type.name }}
-          </div>
-        </div>
-      </div>
-
-
-      <div class="infos-wrapper section">
-        <b>{{ translationService.translations.informations }}</b>
-        <div class="infos">
-          <div class="info height">
-            {{ translationService.translations.height }}: <span>{{ height }}</span>
-          </div>
-
-          <div class="info weight">
-            {{ translationService.translations.weight }}: <span>{{ weight }}</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="stats-wrapper section">
-        <b>{{ translationService.translations.stats }}</b>
-
-        <div class="stats">
-          <div class="stat" *ngFor="let stat of pokemonStats; let i = index">
-            <div class="stat__name" [class.uppercase]="i === 0">{{ translationService.translations[stat.name] }}</div>
-
-            <div class="stat__bar">
-              <div class="stat__color" [style]="stat.style"></div>
-            </div>
-
-            <div class="stat__tooltip">{{ stat.base }}</div>
-          </div>
-        </div>
-      </div>
     </div>
 
     <div class="presentation__second">
-      <div *ngIf="!pokemon.image" class="no-image">{{ translationService.translations.no_image }}</div>
-      <img *ngIf="pokemon.image" class="image" draggable="false" [src]="pokemon.image">
-      <div class="circle" [class.is-disabled]="!pokemon.image" [style]="circleStyle"></div>
+      <div class="presentation__second__pokemon">
+        <div class="types-wrapper section">
+          <b>{{ translationService.translations.type }}</b>
+          <div class="type">
+            <div class="type__badge" *ngFor="let type of pokemonTypes" [style]="type.style">
+              {{ type.name }}
+            </div>
+          </div>
+        </div>
+
+        <div class="infos-wrapper section">
+          <b>{{ translationService.translations.informations }}</b>
+          <div class="infos">
+            <div class="info height">
+              {{ translationService.translations.height }}: <span>{{ height }}</span>
+            </div>
+
+            <div class="info weight">
+              {{ translationService.translations.weight }}: <span>{{ weight }}</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="stats-wrapper section">
+          <b>{{ translationService.translations.stats }}</b>
+
+          <div class="stats">
+            <div class="stat" *ngFor="let stat of pokemonStats; let i = index">
+              <div class="stat__name" [class.uppercase]="i === 0">{{ translationService.translations[stat.name] }}</div>
+
+              <div class="stat__bar">
+                <div class="stat__color" [style]="stat.style"></div>
+              </div>
+
+              <div class="stat__tooltip">{{ stat.base }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="presentation__second__image">
+        <div *ngIf="!pokemon.image" class="no-image">{{ translationService.translations.no_image }}</div>
+        <img *ngIf="pokemon.image" class="image" draggable="false" [src]="pokemon.image">
+        <div class="circle" [class.is-disabled]="!pokemon.image" [style]="circleStyle"></div>
+      </div>
     </div>
 
     <button class="close-button" (click)="closePresentation()" [style]="closeButtonColor">
       <div class="close-button__icon close-icon white-filter"></div>
     </button>
 
-    <poke-square-shape class="shape right" [color]="mainTypeColor"></poke-square-shape>
-    <poke-square-shape class="shape left" [color]="mainTypeColor"></poke-square-shape>
+    <div class="presentation-shapes">
+      <poke-square-shape class="shape right" [color]="mainTypeColor"></poke-square-shape>
+      <poke-square-shape class="shape left" [color]="mainTypeColor"></poke-square-shape>
+    </div>
   </div>
 </div>

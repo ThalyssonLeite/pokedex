@@ -23,10 +23,11 @@ export class PokedexComponent implements OnInit {
   dropdownExpanded: boolean = false;
   resultType: string = '';
   searchTypeColor: string = '';
+  presentationVisible: boolean;
 
   constructor (
     private pokedexService: PokedexService,
-    private store: Store<{ pagination, pokedex, welcome, card }>,
+    private store: Store<{ pagination, pokedex, welcome, card, presentation }>,
     private renderer: Renderer2,
     public translationService: TranslationService
   ) {
@@ -44,6 +45,10 @@ export class PokedexComponent implements OnInit {
     this.listenToPokedexChanges();
     this.listenToSearchResultsChanges();
     this.listenToImageTypeChanges();
+
+    this.store.select('presentation').subscribe(({ visible }) => {
+      if (this.presentationVisible !== visible) this.presentationVisible = visible;
+    })
   }
 
   getPokemons () {
@@ -115,7 +120,7 @@ export class PokedexComponent implements OnInit {
     const parsedPromises = await Promise.all(arrayOfPokemonsResponses.map(res => res.json()));
 
     this.pokemons = parsedPromises;
-    this.setFirstPokemon(this.pokemons[0]);
+    if (!this.presentationVisible) this.setFirstPokemon(this.pokemons[0]);
   }
 
   nameFilter () {

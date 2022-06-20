@@ -32,7 +32,8 @@
   max-width: 1360px;
   margin: auto;
   position: relative;
-  padding: 25px 64px 50px 64px;
+  padding: 35px 64px 50px 64px;
+  transition: 500ms cubic-bezier(.6,.11,.65,1.2);
 
   display: flex;
   flex-direction: column;
@@ -60,9 +61,10 @@
 }
 
 .upper-part {
-  z-index: 1;
+  z-index: 6;
   display: flex;
   justify-content: space-between;
+  gap: 30px;
 }
 
 .spacer {
@@ -70,4 +72,26 @@
   min-height: 1px;
   width: 100%;
   margin-top: 37px
+}
+
+/* RESPONSIVE */
+@media (max-width: 1182px) {
+  .upper-part {
+    justify-content: center;
+  }
+
+  .poke-pokedex {
+    margin-top: 40px
+  }
+
+  .mobile {
+    display: none;
+  }
+}
+
+/* RESPONSIVE */
+@media (max-width: 508px) {
+  .poke-wrapper {
+    padding: 25px 30px 50px 30px;
+  }
 }

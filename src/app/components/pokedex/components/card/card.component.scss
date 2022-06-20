@@ -109,3 +109,16 @@
 .name {
   font: 700 16px Nunito;
 }
+
+/* RESPONSIVE */
+@media (max-width: 736px) {
+  .card {
+    width: 227.2px;
+    height: 256px;
+  }
+
+  .image {
+    width: 120px;
+    height: 120px;
+  }
+}

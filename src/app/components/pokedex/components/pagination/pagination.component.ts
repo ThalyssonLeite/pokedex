@@ -17,6 +17,10 @@ export class PaginationComponent implements OnInit, AfterViewInit, OnDestroy {
   paginationState$: Subscription;
   pokedexState$: Subscription;
   input: any;
+  ulrs: string[];
+  buttonsFontSize: string;
+
+  itemsPerPage: number = 8;
 
   @ViewChild('pageInput') pageInput: ElementRef;
 
@@ -28,9 +32,9 @@ export class PaginationComponent implements OnInit, AfterViewInit, OnDestroy {
 
     this.paginationState$ = store.select('pokedex').subscribe(state => {
       if (!state?.urls.length) return;
+      this.ulrs = state.urls;
 
-      this.initPaginationLib(state.urls)
-      this.updateState(this.paginationLib.firstOutput)
+      this.initPaginationLib(this.ulrs, true)
 
       // this.updateState({ buttons: state.urls, names: state.names})
 
@@ -43,6 +47,7 @@ export class PaginationComponent implements OnInit, AfterViewInit, OnDestroy {
         this.buttons = pagination.buttons;
       })
     })
+
   }
 
   ngAfterViewInit(): void {
@@ -69,12 +74,34 @@ export class PaginationComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
 
-  initPaginationLib (inputItems: any[]) {
-    const itemsPerPage = 8;
+  listenToBreakPointsChanges () {
+    const width = screen.width;
+
+    if (width >= 0 && width <= 400 && this.itemsPerPage !== 1) this.itemsPerPage = 1, this.initPaginationLib(this.ulrs);
+      else if (width >= 400 && width <= 622 && this.itemsPerPage !== 2) this.itemsPerPage = 2, this.initPaginationLib(this.ulrs);
+      else if (width >= 623 && width <= 1051 && this.itemsPerPage !== 4) this.itemsPerPage = 4, this.initPaginationLib(this.ulrs);
+      else if (width >= 1052 && width <= 1367 && this.itemsPerPage !== 6) this.itemsPerPage = 6, this.initPaginationLib(this.ulrs);
+      else if (width >= 1368 && this.itemsPerPage !== 8) this.itemsPerPage = 8, this.initPaginationLib(this.ulrs);
+   window.addEventListener('resize', () => {
+      const width = screen.width;
+
+      if (width >= 0 && width <= 400 && this.itemsPerPage !== 1) this.itemsPerPage = 1, this.initPaginationLib(this.ulrs);
+      else if (width >= 400 && width <= 622 && this.itemsPerPage !== 2) this.itemsPerPage = 2, this.initPaginationLib(this.ulrs);
+      else if (width >= 623 && width <= 1051 && this.itemsPerPage !== 4) this.itemsPerPage = 4, this.initPaginationLib(this.ulrs);
+      else if (width >= 1052 && width <= 1367 && this.itemsPerPage !== 6) this.itemsPerPage = 6, this.initPaginationLib(this.ulrs);
+      else if (width >= 1368 && this.itemsPerPage !== 8) this.itemsPerPage = 8, this.initPaginationLib(this.ulrs);
+   })
+  }
+
+  initPaginationLib (inputItems: any[], firstLoad?: boolean) {
     const visibleButtons = 5;
-    this.paginationLib = new PaginationLib({ inputItems, itemsPerPage, visibleButtons });
+    this.paginationLib = new PaginationLib({ inputItems, itemsPerPage: this.itemsPerPage, visibleButtons });
+    this.updateState(this.paginationLib.firstOutput);
 
     this.paginationLibLoaded = true;
+
+
+    if (firstLoad) this.listenToBreakPointsChanges();
   }
 
   setActivePage (page: number): void {
@@ -97,6 +124,14 @@ export class PaginationComponent implements OnInit, AfterViewInit, OnDestroy {
 
   updateState ({ buttons, items }: { buttons: any[], items: any[] }) {
     const page = this.paginationLib.activePage;
+    const temp = [...buttons].pop().number.toString();
+    const buttonsFontSize = (temp.length > 3)
+      ? 11
+      : (temp.length > 2)
+        ? 14
+        : 16;
+
+    this.buttonsFontSize = `--font-size: ${buttonsFontSize}px`;
 
     this.store.dispatch(updatePagination({ buttons, items, activePage: page }))
   }

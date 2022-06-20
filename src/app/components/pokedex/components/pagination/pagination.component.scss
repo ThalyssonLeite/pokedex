@@ -13,7 +13,7 @@
 
 .pagination__button {
   @extend .pagination__arrow;
-  font: 700 15px Nunito;
+  font: 700 var(--font-size) Nunito;
 
   color: #fff;
 
@@ -91,7 +91,7 @@
 .input {
   outline: none;
   height: 100%;
-  width: 45px;
+  width: 51px;
 
   background: var(--input-bg);
   border: 1px solid var(--title);
@@ -132,5 +132,35 @@
   &:active {
     transition: 0ms;
     filter: brightness(0.94);
+  }
+}
+
+/* RESPONSIVE */
+.mobile {
+  display: none;
+}
+
+@media (max-width: 508px) {
+  .pagination-wrapper {
+    flex-direction: column-reverse;
+  }
+}
+
+@media (max-width: 320px) {
+  .pagination {
+    flex-direction: column;
+  }
+  .arrows {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .desktop {
+    display: none;
+  }
+
+  .mobile {
+    display: inherit;
   }
 }

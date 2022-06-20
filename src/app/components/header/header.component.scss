@@ -1,9 +1,9 @@
 :host {
   display: flex;
   justify-content: flex-end;
+  flex-wrap: wrap;
   gap: 16px;
   width: 100%;
-  padding-bottom: 5px;
   user-select: none;
 }
 
@@ -107,4 +107,21 @@
   width: 30px;
   height: 24px;
   margin-left: auto;
+}
+
+.themes-wrapper {
+  position: relative;
+  z-index: 8;
+}
+
+.languages-wrapper {
+  position: relative;
+  z-index: 7;
+}
+
+/* RESPONSIVE */
+@media (max-width: 1182px) {
+  :host {
+    justify-content: center;
+  }
 }

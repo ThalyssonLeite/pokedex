@@ -5,17 +5,33 @@
   </div>
 
   <div class="pagination">
-    <div class="pagination__arrow left" (click)="backward()">
-      <i class="fallen-v-arrow-icon pagination__icon left white-filter"></i>
+    <div class="arrows mobile">
+      <div class="pagination__arrow left" (click)="backward()">
+        <i class="fallen-v-arrow-icon pagination__icon left white-filter"></i>
+      </div>
+
+      <div class="pagination__arrow right" (click)="forward()">
+        <i class="fallen-v-arrow-icon pagination__icon right white-filter"></i>
+      </div>
     </div>
 
-    <div class="pagination__buttons">
-      <div class="pagination__button z-index" *ngFor="let button of buttons" [class.is-active]="button.active" (click)="setActivePage(button.number)">
+    <div class="pagination__buttons mobile">
+      <div class="pagination__button z-index" *ngFor="let button of buttons" [class.is-active]="button.active" (click)="setActivePage(button.number)" [style]="buttonsFontSize">
         {{ button.number }}
       </div>
     </div>
 
-    <div class="pagination__arrow right" (click)="forward()">
+    <div class="pagination__arrow left desktop" (click)="backward()">
+      <i class="fallen-v-arrow-icon pagination__icon left white-filter"></i>
+    </div>
+
+    <div class="pagination__buttons desktop">
+      <div class="pagination__button z-index" *ngFor="let button of buttons" [class.is-active]="button.active" (click)="setActivePage(button.number)" [style]="buttonsFontSize">
+        {{ button.number }}
+      </div>
+    </div>
+
+    <div class="pagination__arrow right desktop" (click)="forward()">
       <i class="fallen-v-arrow-icon pagination__icon right white-filter"></i>
     </div>
   </div>

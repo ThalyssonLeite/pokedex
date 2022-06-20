@@ -95,6 +95,15 @@ export class PaginationComponent implements OnInit, AfterViewInit, OnDestroy {
 
   initPaginationLib (inputItems: any[], firstLoad?: boolean) {
     const visibleButtons = 5;
+
+    const width = screen.width;
+
+    if (width >= 0 && width <= 400 && this.itemsPerPage !== 1) this.itemsPerPage = 1;
+    else if (width >= 400 && width <= 622 && this.itemsPerPage !== 2) this.itemsPerPage = 2;
+    else if (width >= 623 && width <= 1051 && this.itemsPerPage !== 4) this.itemsPerPage = 4;
+    else if (width >= 1052 && width <= 1367 && this.itemsPerPage !== 6) this.itemsPerPage = 6;
+    else if (width >= 1368 && this.itemsPerPage !== 8) this.itemsPerPage = 8;
+
     this.paginationLib = new PaginationLib({ inputItems, itemsPerPage: this.itemsPerPage, visibleButtons });
     this.updateState(this.paginationLib.firstOutput);
 

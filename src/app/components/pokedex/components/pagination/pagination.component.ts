@@ -76,7 +76,6 @@ export class PaginationComponent implements OnInit, AfterViewInit, OnDestroy {
 
   listenToBreakPointsChanges() {
     const width = this.pageInput.nativeElement.closest('body').clientWidth;
-    console.log(width)
 
     if (width >= 0 && width <= 400 && this.itemsPerPage !== 1) this.itemsPerPage = 1, this.initPaginationLib(this.ulrs);
     else if (width >= 400 && width <= 622 && this.itemsPerPage !== 2) this.itemsPerPage = 2, this.initPaginationLib(this.ulrs);
@@ -85,7 +84,6 @@ export class PaginationComponent implements OnInit, AfterViewInit, OnDestroy {
     else if (width >= 1368 && this.itemsPerPage !== 8) this.itemsPerPage = 8, this.initPaginationLib(this.ulrs);
     window.onresize = () => {
       const width = this.pageInput.nativeElement.closest('body').clientWidth;
-      console.log(width >= 0 && width <= 400 && this.itemsPerPage !== 1)
 
       if (width >= 0 && width <= 400 && this.itemsPerPage !== 1) this.itemsPerPage = 1, this.initPaginationLib(this.ulrs);
       else if (width >= 400 && width <= 622 && this.itemsPerPage !== 2) this.itemsPerPage = 2, this.initPaginationLib(this.ulrs);

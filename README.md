@@ -8,8 +8,7 @@
 <p align="center">
     <a href="#tecnologias">Tecnologias</a> •
     <a href="#features">Features</a> •
-    <a href="#paleta-de-cores">Decisões</a> •
-    <a href="#rodando-no-navegador">Rodando no navegador</a> •
+    <a href="#decisões">Decisões</a> •
     <a href="#autor">Autor</a>
 </p>
 

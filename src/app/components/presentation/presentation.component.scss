@@ -58,6 +58,7 @@ b {
   flex-direction: column;
   opacity: 0;
   transition: 400ms ease 650ms;
+  overflow: hidden;
 }
 
 .presentation-shapes {
@@ -336,6 +337,7 @@ b {
 /* RESPONSIVE */
 @media (max-width: 810px) {
   .presentation {
+    overflow: auto;
     height: 95vh;
     padding: 90px 30px 0px 30px;
 

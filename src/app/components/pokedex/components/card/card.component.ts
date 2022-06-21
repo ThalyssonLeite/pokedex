@@ -16,7 +16,7 @@ export class CardComponent implements OnInit, OnChanges {
 
   @ViewChild('image') image: ElementRef
 
-  constructor(private store: Store<{ card, header }>, public translationService: TranslationService) {}
+  constructor(private store: Store<{ card, header }>, public translationService: TranslationService) { }
 
   imageConfig = {
     'official': 'official-artwork',
@@ -34,7 +34,7 @@ export class CardComponent implements OnInit, OnChanges {
     this.listenToCardsState();
   }
 
-  listenToCardsState () {
+  listenToCardsState() {
     this.store.select('card').subscribe(({ imageType }) => {
       if (!this.pokemon) return;
       const type = this.imageConfig[imageType];
@@ -44,23 +44,23 @@ export class CardComponent implements OnInit, OnChanges {
     });
   }
 
-  listenToHeaderState () {
+  listenToHeaderState() {
     this.store.select('header').subscribe(({ language }) => {
       if (!this.pokemon) return;
 
       const isEnglish = language !== 'en';
 
-      this.height = isEnglish ? `${this.pokemon.weight / 10}kg` : `${(this.pokemon.weight * 0.220462).toFixed(1)}lb`;
-      this.weight = isEnglish ? `${this.pokemon.weight / 10}m` : `${(this.pokemon.height * 0.3280839895).toFixed(1)}ft`;
+      this.height = isEnglish ? `${this.pokemon.height / 10}kg` : `${(this.pokemon.height * 0.220462).toFixed(1)}lb`;
+      this.weight = isEnglish ? `${this.pokemon.weight / 10}m` : `${(this.pokemon.weight * 0.3280839895).toFixed(1)}ft`;
     });
   }
 
-  choosePokemon (): void {
+  choosePokemon(): void {
     //Provides the image to presentation
-    this.store.dispatch(setChoosenPokemon({ pokemon: { ...this.pokemon, image: this.pokemonImage} }));
+    this.store.dispatch(setChoosenPokemon({ pokemon: { ...this.pokemon, image: this.pokemonImage } }));
   }
 
-  normalizeBugs () {
+  normalizeBugs() {
     if (!this.pokemon) return;
     const idString = String(this.pokemon.id);
 

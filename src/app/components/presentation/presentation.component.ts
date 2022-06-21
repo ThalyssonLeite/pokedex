@@ -51,22 +51,22 @@ export class PresentationComponent implements OnInit {
 
   }
 
-  listenToHeaderState () {
+  listenToHeaderState() {
     this.store.select('header').subscribe(({ language }) => {
       if (!this.pokemon) return;
 
       const isEnglish = language !== 'en';
 
-      this.height = isEnglish ? `${this.pokemon.weight / 10}kg` : `${(this.pokemon.weight * 0.220462).toFixed(1)}lb`;
-      this.weight = isEnglish ? `${this.pokemon.weight / 10}m` : `${(this.pokemon.height * 0.3280839895).toFixed(1)}ft`;
+      this.height = isEnglish ? `${this.pokemon.height / 10}kg` : `${(this.pokemon.height * 0.220462).toFixed(1)}lb`;
+      this.weight = isEnglish ? `${this.pokemon.weight / 10}m` : `${(this.pokemon.weight * 0.3280839895).toFixed(1)}ft`;
     }).unsubscribe();
   }
 
-  getHeightAndWeight () {
+  getHeightAndWeight() {
 
   }
 
-  setPokemonTypes () {
+  setPokemonTypes() {
     this.pokemonTypes = this.pokemon.types.map(type => {
       const typeName = type.type.name.toLowerCase().trim();
 
@@ -79,10 +79,10 @@ export class PresentationComponent implements OnInit {
         name: typeName
       };
     })
-    .filter(type => type !== undefined);
+      .filter(type => type !== undefined);
   };
 
-  setStatsPercentage () {
+  setStatsPercentage() {
     this.pokemonStats = this.pokemon.stats.map(stat => {
       const statName = stat.stat.name.toLowerCase().trim();
 
@@ -97,10 +97,10 @@ export class PresentationComponent implements OnInit {
         base: stat.base_stat
       };
     })
-    .filter(type => type !== undefined);
+      .filter(type => type !== undefined);
   };
 
-  setCircleColor () {
+  setCircleColor() {
     const hexColor = this.pokemonTypes[0].style.split(' ')[1];
 
     const bgColor = `--bg: ${hexColor}15`;
@@ -111,7 +111,7 @@ export class PresentationComponent implements OnInit {
     this.circleStyle = [bgColor, borderColor, bgActiveColor, borderActive].join('; ');
   }
 
-  setButtonColor () {
+  setButtonColor() {
     const hexColor = this.pokemonTypes[0].style.split(' ')[1];
 
     const bgColor = `--bg: ${hexColor};`;
@@ -119,12 +119,12 @@ export class PresentationComponent implements OnInit {
     this.closeButtonColor = bgColor;
   }
 
-  setMainTypeColor () {
+  setMainTypeColor() {
     this.mainTypeColor = this.pokemonTypes[0].style.split(' ')[1];
   }
 
   //Function used in template
-  closePresentation (): void {
+  closePresentation(): void {
     this.store.dispatch(closePresentation());
   }
 }

@@ -24,7 +24,7 @@ export class PaginationComponent implements OnInit, AfterViewInit, OnDestroy {
 
   @ViewChild('pageInput') pageInput: ElementRef;
 
-  constructor (private store: Store<{ pagination, pokedex }>) {
+  constructor(private store: Store<{ pagination, pokedex }>) {
   }
 
   ngOnInit(): void {
@@ -74,35 +74,39 @@ export class PaginationComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
 
-  listenToBreakPointsChanges () {
-    const width = screen.width;
+  listenToBreakPointsChanges() {
+    const width = this.pageInput.nativeElement.closest('body').clientWidth;
+    console.log(width)
 
     if (width >= 0 && width <= 400 && this.itemsPerPage !== 1) this.itemsPerPage = 1, this.initPaginationLib(this.ulrs);
-      else if (width >= 400 && width <= 622 && this.itemsPerPage !== 2) this.itemsPerPage = 2, this.initPaginationLib(this.ulrs);
-      else if (width >= 623 && width <= 1051 && this.itemsPerPage !== 4) this.itemsPerPage = 4, this.initPaginationLib(this.ulrs);
-      else if (width >= 1052 && width <= 1367 && this.itemsPerPage !== 6) this.itemsPerPage = 6, this.initPaginationLib(this.ulrs);
-      else if (width >= 1368 && this.itemsPerPage !== 8) this.itemsPerPage = 8, this.initPaginationLib(this.ulrs);
-   window.addEventListener('resize', () => {
-      const width = screen.width;
+    else if (width >= 400 && width <= 622 && this.itemsPerPage !== 2) this.itemsPerPage = 2, this.initPaginationLib(this.ulrs);
+    else if (width >= 623 && width <= 1051 && this.itemsPerPage !== 4) this.itemsPerPage = 4, this.initPaginationLib(this.ulrs);
+    else if (width >= 1052 && width <= 1367 && this.itemsPerPage !== 6) this.itemsPerPage = 6, this.initPaginationLib(this.ulrs);
+    else if (width >= 1368 && this.itemsPerPage !== 8) this.itemsPerPage = 8, this.initPaginationLib(this.ulrs);
+    window.onresize = () => {
+      const width = this.pageInput.nativeElement.closest('body').clientWidth;
+      console.log(width >= 0 && width <= 400 && this.itemsPerPage !== 1)
 
       if (width >= 0 && width <= 400 && this.itemsPerPage !== 1) this.itemsPerPage = 1, this.initPaginationLib(this.ulrs);
       else if (width >= 400 && width <= 622 && this.itemsPerPage !== 2) this.itemsPerPage = 2, this.initPaginationLib(this.ulrs);
       else if (width >= 623 && width <= 1051 && this.itemsPerPage !== 4) this.itemsPerPage = 4, this.initPaginationLib(this.ulrs);
       else if (width >= 1052 && width <= 1367 && this.itemsPerPage !== 6) this.itemsPerPage = 6, this.initPaginationLib(this.ulrs);
       else if (width >= 1368 && this.itemsPerPage !== 8) this.itemsPerPage = 8, this.initPaginationLib(this.ulrs);
-   })
+    }
   }
 
-  initPaginationLib (inputItems: any[], firstLoad?: boolean) {
+  initPaginationLib(inputItems: any[], firstLoad?: boolean) {
     const visibleButtons = 5;
 
-    const width = screen.width;
+    if (firstLoad) {
+      const width = this.pageInput.nativeElement.closest('body').clientWidth;
 
-    if (width >= 0 && width <= 400 && this.itemsPerPage !== 1) this.itemsPerPage = 1;
-    else if (width >= 400 && width <= 622 && this.itemsPerPage !== 2) this.itemsPerPage = 2;
-    else if (width >= 623 && width <= 1051 && this.itemsPerPage !== 4) this.itemsPerPage = 4;
-    else if (width >= 1052 && width <= 1367 && this.itemsPerPage !== 6) this.itemsPerPage = 6;
-    else if (width >= 1368 && this.itemsPerPage !== 8) this.itemsPerPage = 8;
+      if (width >= 0 && width <= 400 && this.itemsPerPage !== 1) this.itemsPerPage = 1;
+      else if (width >= 400 && width <= 622 && this.itemsPerPage !== 2) this.itemsPerPage = 2;
+      else if (width >= 623 && width <= 1051 && this.itemsPerPage !== 4) this.itemsPerPage = 4;
+      else if (width >= 1052 && width <= 1367 && this.itemsPerPage !== 6) this.itemsPerPage = 6;
+      else if (width >= 1368 && this.itemsPerPage !== 8) this.itemsPerPage = 8;
+    }
 
     this.paginationLib = new PaginationLib({ inputItems, itemsPerPage: this.itemsPerPage, visibleButtons });
     this.updateState(this.paginationLib.firstOutput);
@@ -113,25 +117,25 @@ export class PaginationComponent implements OnInit, AfterViewInit, OnDestroy {
     if (firstLoad) this.listenToBreakPointsChanges();
   }
 
-  setActivePage (page: number): void {
+  setActivePage(page: number): void {
     if (!page) return;
     const output = this.paginationLib.setActivePage(page);
     this.updateState(output);
     this.input = '';
   }
 
-  forward (): void {
+  forward(): void {
     const output = this.paginationLib.forwardPage();
 
     this.updateState(output);
   }
 
-  backward (): void {
+  backward(): void {
     const output = this.paginationLib.backwardPage();
     this.updateState(output);
   }
 
-  updateState ({ buttons, items }: { buttons: any[], items: any[] }) {
+  updateState({ buttons, items }: { buttons: any[], items: any[] }) {
     const page = this.paginationLib.activePage;
     const temp = [...buttons].pop().number.toString();
     const buttonsFontSize = (temp.length > 3)
@@ -145,7 +149,7 @@ export class PaginationComponent implements OnInit, AfterViewInit, OnDestroy {
     this.store.dispatch(updatePagination({ buttons, items, activePage: page }))
   }
 
-  formatInput ($event) {
+  formatInput($event) {
     if (!this.input.length) return;
     const toNumber = parseInt(this.input);
     const isNaN = Number.isNaN(toNumber);

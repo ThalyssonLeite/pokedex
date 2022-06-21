@@ -50,8 +50,8 @@ export class CardComponent implements OnInit, OnChanges {
 
       const isEnglish = language !== 'en';
 
-      this.height = isEnglish ? `${this.pokemon.height / 10}kg` : `${(this.pokemon.height * 0.220462).toFixed(1)}ft`;
-      this.weight = isEnglish ? `${this.pokemon.weight / 10}m` : `${(this.pokemon.weight * 0.3280839895).toFixed(1)}lb`;
+      this.height = isEnglish ? `${this.pokemon.height / 10}m` : `${(this.pokemon.height * 0.328084).toFixed(1)}ft`;
+      this.weight = isEnglish ? `${this.pokemon.weight / 10}kg` : `${(this.pokemon.weight * 0.220462).toFixed(1)}lb`;
     });
   }
 

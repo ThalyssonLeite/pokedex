@@ -58,7 +58,6 @@ export class PresentationComponent implements OnInit {
       const isEnglish = language !== 'en';
 
       this.height = isEnglish ? `${this.pokemon.height / 10}m` : `${(this.pokemon.height * 0.328084).toFixed(1)}ft`;
-      console.log(this.pokemon.name, this.height)
       this.weight = isEnglish ? `${this.pokemon.weight / 10}kg` : `${(this.pokemon.weight * 0.220462).toFixed(1)}lb`;
     }).unsubscribe();
   }

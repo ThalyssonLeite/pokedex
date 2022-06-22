@@ -70,9 +70,9 @@
 
 - [X] <b style="font-size: 13px">Lógica e componente de paginação feitos sem bibliotecas</b>
 
-  Toda a lógica de paginação de items foi criada para funcionar em qualquer cenário e não estar acoplada dentro ao layout, uma classe TypeScript fornece todos os dados necessários. Isso me dá liberdade para criar inúmeros componentes com sua própria identidade visual.
+  Toda a lógica de paginação de items foi criada para funcionar em qualquer cenário e não estar acoplada ao layout, uma classe TypeScript faz todo o processamento e fornece todos os dados necessários. Isso me dá liberdade para criar inúmeros componentes com sua própria identidade visual.
 
-  Lembrando que esta lógica pode ser aproveitada em qualquer lugar da aplicação criando um componente versátil e especial em sua essência.
+  Lembrando que esta lógica pode ser aproveitada em qualquer lugar da aplicação criando um componente versátil e especial.
   
   Neste caso não usar uma biblioteca me deu a possibilidade de adaptar a lógica para que os números nunca fiquem grande demais, caso os números de paginação crescam, ou pequenos demais, caso eles fiquem muito pequenos, veja o exemplo abaixo e observe como os números diminuem quando passamos de 10 para 100 e para 1000:
 
@@ -84,15 +84,17 @@
   Ter uma estrutura bem definida, uma única fonte de onde todos os componentes podem beber, cria um código mais previsível e organizado.
 - [X] <b style="font-size: 13px">`__icons.scss` e `__images.scss` patern</b>
   
-  O que é melhor? Isso:
-
+  O que é melhor?
+  
+  Isso:
+  
   <img src="./github/svg.png" width="500" style="border-radius: 8px">
 
   ou isso:
 
   <img src="./github/i_tag.png" width="500" style="border-radius: 8px">
 
-  As classes `white-filter` e `dropdown__icon` setam a cor e as dimensões do ícone respectivamente. Mas o que faz a classe `globe-fill-icon`? Ela carrega a referência do svg importado como background. Uma `utility class` criada a mão que pode ser usada globalmente na aplicação, se este ícone mudar no futuro, ele será alterado em apenas 1 lugar e todos os lugares onde ele é chamado refletirão o resultado, o que não iria acontecer por exemplo se importássemos a referência do arquivo dentro de uma `ìmg` tag, se o import mudasse TODOS os lugares onde aquela imagem fosse chamada não iriam mais funcionar.
+  Se você pensa como eu, provavelmente pensou no segundo. Sem linhas ilegíveis de códgigo, sem imports, e com uma classe descritiva: `globe-fill-icon`. As classes `white-filter` e `dropdown__icon` setam a cor e as dimensões do ícone respectivamente. Mas o que faz a classe `globe-fill-icon`? Ela carrega a referência do svg importado como background. Uma `utility class` criada a mão que pode ser usada globalmente na aplicação, se este ícone mudar no futuro, ele será alterado em apenas 1 lugar e todos os lugares onde ele é chamado refletirão o resultado, o que não iria acontecer por exemplo se importássemos a referência do arquivo dentro de uma `ìmg` tag, se o import mudasse TODOS os lugares onde aquela imagem fosse chamada não iriam mais funcionar.
 
   Nas classes com esse pattern usamos o sufixo `icon` para ícones e `image` para imagens. A coleção desses ícones estão dentro de um único arquivo SCSS que vai ser importado dentro do `styles.scss`, a partir daí essas classes ficarão distribuídas globalmente na aplicação.
 

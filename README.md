@@ -52,7 +52,7 @@
 
 - [X] <b style="font-size: 13px">Nada de `Bootstrap`, `Material Design`, `Font Awesome` ou `Tailwind`</b>
   
-    Foi utilizado em todo o projeto CSS puro, como SCSS como pre-processador. Por que não usar bibliotecas CSS, os famosos "frameworks"? Usar CSS puro em todas as ocasiões me permite organizar melhor meu html, de forma que se você olhar o `DevTools` pelo navegador não vai ver uma coleção indistinta de classes estranhas juntas, serão nomes semânticos como `pagination`, `card`, `stat`, `search-bar`, `welcome`, `banner`. 
+    Foi utilizado em todo o projeto CSS puro, como SCSS como pre-processador. Por que não usar bibliotecas CSS, os famosos "frameworks"? Usar CSS puro em todas as ocasiões me permite organizar melhor meu HTML, de forma que se você olhar o `DevTools` pelo navegador não vai ver uma coleção indistinta de classes estranhas juntas, serão nomes semânticos como `pagination`, `card`, `stat`, `search-bar`, `welcome`, `banner`. 
 
     O código fica mais limpo, fácil de entender e de dar manutenção. Graças aos componentes não existe repetição de código. E ao invés de eu pesar o projeto com centenas de `utility classes` que esses "frameworks" provêem, eu criei as minhas próprias e as disponibilizei globalmente, não passaram de 10. 
 
@@ -93,7 +93,7 @@
 
   As classes `white-filter` e `dropdown__icon` setam a cor e as dimensões do ícone respectivamente. Mas o que faz a classe `globe-fill-icon`? Ela carrega a referência do svg importado como background. Uma `utility class` criada a mão que pode ser usada globalmente na aplicação, se este ícone mudar no futuro, ele será alterado em apenas 1 lugar e todos os lugares onde ele é chamado refletirão o resultado, o que não iria acontecer por exemplo se importássemos a referência do arquivo dentro de uma `ìmg` tag, se o import mudasse TODOS os lugares onde aquela imagem fosse chamada não iriam mais funcionar.
 
-  Nas classes com esse pattern usamos o sufixo `icon` para ícones e `image` para imagens. A coleção desses ícones estão dentro de um único arquivo scss que vai ser importado dentro do `styles.scss`, a partir daí essas classes ficarão distribuídas globalmente na aplicação.
+  Nas classes com esse pattern usamos o sufixo `icon` para ícones e `image` para imagens. A coleção desses ícones estão dentro de um único arquivo SCSS que vai ser importado dentro do `styles.scss`, a partir daí essas classes ficarão distribuídas globalmente na aplicação.
 
   Esse é um exemplo de como uma classe é criada dentro do arquivo `__icons.scss`:
 

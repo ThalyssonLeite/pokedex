@@ -54,7 +54,7 @@
   
     Foi utilizado em todo o projeto CSS puro, como SCSS como pre-processador. Por que não usar bibliotecas CSS, os famosos "frameworks"? Usar CSS puro em todas as ocasiões me permite organizar melhor meu html, de forma que se você olhar o `DevTools` pelo navegador não vai ver uma coleção indistinta de classes estranhas juntas, serão nomes semânticos como `pagination`, `card`, `stat`, `search-bar`, `welcome`, `banner`. 
 
-    O código fica mais limpo, fácil de entender e de dar manutenção. Graças aos componentes não existe repetição de código. E ao invés de eu pesar o projeto como centenas de `utility classes` que esses "frameworks" provêem, eu criei as minhas próprias e as disponibilizei globalmente, não passaram de 10. 
+    O código fica mais limpo, fácil de entender e de dar manutenção. Graças aos componentes não existe repetição de código. E ao invés de eu pesar o projeto com centenas de `utility classes` que esses "frameworks" provêem, eu criei as minhas próprias e as disponibilizei globalmente, não passaram de 10. 
 
     Usar CSS puro me abre um leque maior de possibilidades. Por exemplo, se repara na responsividade vai perceber que existem inúmeros breakpoints encaixados de quase perfeita para cada tamanho de tela, seja ele qual for, esse detalhismo que fez toda a diferença certamente seria impraticável senão impossível com esses frameworks.
 

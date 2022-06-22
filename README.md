@@ -62,9 +62,9 @@
 
     <i>Abaixo algumas as animações de loading que aparecem depois 280ms caso os cards pokémon não tenham sido carregados, inclusive esse delay também foi setado via CSS (pela compressão do `gif` a imagem pode ficar cerrilhada).</i>
 
-    <!-- <img src="./github/loading_dark.gif" height="270" style="border-radius: 8px"> -->
+    <img src="./github/loading_dark.gif" height="270" style="border-radius: 8px">
 
-    <!-- <img src="./github/loading_light.gif" height="270" style="border-radius: 8px"> -->
+    <img src="./github/loading_light.gif" height="270" style="border-radius: 8px">
 
 
 - [X] <b style="font-size: 13px">Lógica e componente de paginação feitos sem bibliotecas</b>

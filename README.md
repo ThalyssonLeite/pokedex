@@ -56,12 +56,11 @@
 
     O código fica mais limpo, fácil de entender e de dar manutenção. Graças aos componentes não existe repetição de código. E ao invés de eu pesar o projeto com centenas de `utility classes` que esses "frameworks" provêem, eu criei as minhas próprias e as disponibilizei globalmente, não passaram de 10. 
 
-    Usar CSS puro me abre um leque maior de possibilidades. Por exemplo, se reparar na responsividade vai perceber que existem inúmeros breakpoints encaixados de quase perfeita para cada tamanho de tela, seja ele qual for, esse detalhismo que fez toda a diferença certamente seria impraticável senão impossível com esses frameworks.
+    Usar CSS puro me abre um leque maior de possibilidades. Por exemplo, se reparar na responsividade vai perceber que existem inúmeros breakpoints encaixados de forma quase perfeita para cada tamanho de tela, seja ele qual for, esse detalhismo que fez toda a diferença certamente seria impraticável senão impossível com esses "frameworks".
 
-    Algumas animações somente possíveis com CSS foram adicionadas. Se eu tivesse utilizado qualquer biblioteca dessas meu trabalho teria ficado mais do mesmo, sem muito apelo visual. É claro que para usar todo o poder do CSS sem criar um pattern caótico é necessário domínio e foi esse foi um dos motivos de eu ter escolhido usar CSS puro, num contexto de um projeto talvez seja preferível por outros fatores utilizar alguma biblioteca do gênero, mas isso não será um problema. Porque quem domina o CSS irá dominar qualquer framework seja ele `Bootstrap`, `Material Design`, `Font Awesome` ou `Tailwind`.
+    Algumas animações somente possíveis com CSS foram adicionadas. Se eu tivesse focado em usar somente alguma biblioteca do gênero meu trabalho teria ficado mais do mesmo, sem muito apelo visual. É claro que para usar todo o poder do CSS sem criar um pattern caótico é necessário domínio e esse foi um dos motivos de eu ter escolhido usar CSS puro. Num contexto de um projeto talvez seja preferível, por outros fatores, utilizar alguma biblioteca do gênero, mas isso não será um problema. Porque quem domina o CSS irá dominar qualquer framework seja ele `Bootstrap`, `Material Design`, `Font Awesome` ou `Tailwind`.
 
-    <i>Abaixo algumas as animações de loading que aparecem depois 280ms caso os cards pokémon não tenham sido carregados, inclusive esse delay também foi setado via CSS (pela compressão do `
-    gif` a imagem pode ficar cerrilhada).</i>
+    <i>Abaixo algumas as animações de loading que aparecem depois 280ms caso os cards pokémon não tenham sido carregados, inclusive esse delay também foi setado via CSS (pela compressão do `gif` a imagem pode ficar cerrilhada).</i>
 
     <!-- <img src="./github/loading_dark.gif" height="270" style="border-radius: 8px"> -->
 
@@ -74,14 +73,14 @@
 
   Lembrando que esta lógica pode ser aproveitada em qualquer lugar da aplicação criando um componente versátil e especial em sua essência.
   
-  Neste caso não usar uma biblioteca me deu a possibilidade de adaptar a lógica para que os números nunca fiquem grande demais caso os números de paginação crescam ou pequenos demais caso eles fiquem muito pequenos, veja o exemplo abaixo e veja como os números diminuem quando passamos de 10 para 100 e para 1000:
+  Neste caso não usar uma biblioteca me deu a possibilidade de adaptar a lógica para que os números nunca fiquem grande demais, caso os números de paginação crescam, ou pequenos demais, caso eles fiquem muito pequenos, veja o exemplo abaixo e observe como os números diminuem quando passamos de 10 para 100 e para 1000:
 
   <img src="./github/pagination_buttons.gif" height="270" style="border-radius: 8px">
 - [X] <b style="font-size: 13px">Uso de gerenciamento de estado</b>
 
-  O gerenciamento de estado me ajudou em diversas situações no debug e numa aplicação maior faria toda a diferença. Durante o desenvolvimento do projeto foi de vital importância a compreensão visual do estado da aplicação. Usando a extênsão ficou claro o que estava acontecendo e que gargalos de perfomance poderiam ser diminuídos e como fazer isso.
+  O gerenciamento de estado me ajudou em diversas situações no debug e numa aplicação maior faria toda a diferença. Durante o desenvolvimento do projeto foi de vital importância a compreensão visual do estado da aplicação. Usando a extênsão para navegador ficou claro o que estava acontecendo e que gargalos de perfomance poderiam ser diminuídos e como fazer isso.
 
-  Ter uma estrutura bem definida, uma única fonte, de onde todos os componentes podem beber, cria um código mais previsível e organizado.
+  Ter uma estrutura bem definida, uma única fonte de onde todos os componentes podem beber, cria um código mais previsível e organizado.
 - [X] <b style="font-size: 13px">`__icons.scss` e `__images.scss` patern</b>
   
   O que é melhor? Isso:
@@ -92,9 +91,9 @@
 
   <img src="./github/i_tag.png" width="500" style="border-radius: 8px">
 
-  As classes `white-filter` e `dropdown__icon` setam a cor e as dimensões do ícone respectivamente. Mas o que faz a classe `globe-fill-icon`? Ela carrega a referência do svg importado como background. Uma `utility class` criada a mão que pode ser usada globalmente na aplicação, se este ícone mudar no futuro, ele irá em apenas 1 lugar e todos os lugares onde ele é chamado refletirão o resultado, o que não iria acontecer por exemplo se importássemos a referência do arquivo dentro de uma `ìmg` tag, se o import mudasse TODOS os lugares onde aquela imagem fosse chamada não iriam mais funcionar.
+  As classes `white-filter` e `dropdown__icon` setam a cor e as dimensões do ícone respectivamente. Mas o que faz a classe `globe-fill-icon`? Ela carrega a referência do svg importado como background. Uma `utility class` criada a mão que pode ser usada globalmente na aplicação, se este ícone mudar no futuro, ele será alterado em apenas 1 lugar e todos os lugares onde ele é chamado refletirão o resultado, o que não iria acontecer por exemplo se importássemos a referência do arquivo dentro de uma `ìmg` tag, se o import mudasse TODOS os lugares onde aquela imagem fosse chamada não iriam mais funcionar.
 
-  Usamos o sufixo `icon` para ícones e `image` para imagens. A coleção desses ícones vão para dentro de um único arquivo scss que vai ser importado dentro do `styles.scss`, a partir daí essas classes ficarão distribuídas globalmente na aplicação.
+  Nas classes com esse pattern usamos o sufixo `icon` para ícones e `image` para imagens. A coleção desses ícones estão dentro de um único arquivo scss que vai ser importado dentro do `styles.scss`, a partir daí essas classes ficarão distribuídas globalmente na aplicação.
 
   Esse é um exemplo de como uma classe é criada dentro do arquivo `__icons.scss`:
 

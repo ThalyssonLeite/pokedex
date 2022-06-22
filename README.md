@@ -60,7 +60,7 @@
 
     Algumas animações somente possíveis com CSS foram adicionadas. Se eu tivesse focado em usar somente alguma biblioteca do gênero meu trabalho teria ficado mais do mesmo, sem muito apelo visual. É claro que para usar todo o poder do CSS sem criar um pattern caótico é necessário domínio e esse foi um dos motivos de eu ter escolhido usar CSS puro. Num contexto de um projeto talvez seja preferível, por outros fatores, utilizar alguma biblioteca do gênero, mas isso não será um problema. Porque quem domina o CSS irá dominar qualquer framework seja ele `Bootstrap`, `Material Design`, `Font Awesome` ou `Tailwind`.
 
-    <i>Abaixo algumas as animações de loading que aparecem depois 280ms caso os cards pokémon não tenham sido carregados, inclusive esse delay também foi setado via CSS (pela compressão do `gif` a imagem pode ficar cerrilhada).</i>
+    <i>Abaixo as animações de loading que aparecem depois 280ms caso os cards pokémon não tenham sido carregados, inclusive esse delay também foi setado via CSS (pela compressão do `gif` a imagem pode ficar cerrilhada).</i>
 
     <div align="center"><img src="./github/loading_dark.gif" height="270" style="border-radius: 8px"></div>
     

@@ -76,7 +76,7 @@
   
   Neste caso não usar uma biblioteca me deu a possibilidade de adaptar a lógica para que os números nunca fiquem grande demais, caso os números de paginação crescam, ou pequenos demais, caso eles fiquem muito pequenos, veja o exemplo abaixo e observe como os números diminuem quando passamos de 10 para 100 e para 1000:
 
-  <img src="./github/pagination_buttons.gif" height="270" style="border-radius: 8px"  align="center">
+  <div align="center"><img src="./github/pagination_buttons.gif" height="270" style="border-radius: 8px"  align="center"></div>
 - [X] <b style="font-size: 13px">Uso de gerenciamento de estado</b>
 
   O gerenciamento de estado me ajudou em diversas situações no debug e numa aplicação maior faria toda a diferença. Durante o desenvolvimento do projeto foi de vital importância a compreensão visual do estado da aplicação. Usando a extênsão para navegador ficou claro o que estava acontecendo e que gargalos de perfomance poderiam ser diminuídos e como fazer isso.

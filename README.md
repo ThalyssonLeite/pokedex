@@ -56,7 +56,7 @@
 
     O código fica mais limpo, fácil de entender e de dar manutenção. Graças aos componentes não existe repetição de código. E ao invés de eu pesar o projeto com centenas de `utility classes` que esses "frameworks" provêem, eu criei as minhas próprias e as disponibilizei globalmente, não passaram de 10. 
 
-    Usar CSS puro me abre um leque maior de possibilidades. Por exemplo, se repara na responsividade vai perceber que existem inúmeros breakpoints encaixados de quase perfeita para cada tamanho de tela, seja ele qual for, esse detalhismo que fez toda a diferença certamente seria impraticável senão impossível com esses frameworks.
+    Usar CSS puro me abre um leque maior de possibilidades. Por exemplo, se reparar na responsividade vai perceber que existem inúmeros breakpoints encaixados de quase perfeita para cada tamanho de tela, seja ele qual for, esse detalhismo que fez toda a diferença certamente seria impraticável senão impossível com esses frameworks.
 
     Algumas animações somente possíveis com CSS foram adicionadas. Se eu tivesse utilizado qualquer biblioteca dessas meu trabalho teria ficado mais do mesmo, sem muito apelo visual. É claro que para usar todo o poder do CSS sem criar um pattern caótico é necessário domínio e foi esse foi um dos motivos de eu ter escolhido usar CSS puro, num contexto de um projeto talvez seja preferível por outros fatores utilizar alguma biblioteca do gênero, mas isso não será um problema. Porque quem domina o CSS irá dominar qualquer framework seja ele `Bootstrap`, `Material Design`, `Font Awesome` ou `Tailwind`.
 

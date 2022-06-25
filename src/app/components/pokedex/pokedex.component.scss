@@ -30,7 +30,7 @@
 
 .pokedex {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   flex-wrap: wrap;
   gap: 32px;
 }
@@ -228,5 +228,11 @@
 
   .mobile {
     display: flex;
+  }
+}
+
+@media (max-width: 1367px) {
+  .pokedex {
+    justify-content: center;
   }
 }

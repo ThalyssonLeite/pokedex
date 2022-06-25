@@ -149,6 +149,7 @@
 @media (max-width: 320px) {
   .pagination {
     flex-direction: column;
+    align-items: center;
   }
   .arrows {
     display: flex;

@@ -44,7 +44,7 @@ b {
   box-shadow: 0 0 25px -6px rgb(8 7 16 / 65%);
   border-radius: 10px;
 
-  height: min(459px, 95vh);
+  max-height: 95vh;
   width: min(800px, 95vw);
 
   font-family: Nunito;

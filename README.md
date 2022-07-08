@@ -79,7 +79,7 @@
   <div align="center"><img src="./github/pagination_buttons.gif" height="270" style="border-radius: 8px"  align="center"></div>
 - [X] <b style="font-size: 13px">Uso de gerenciamento de estado</b>
 
-  O gerenciamento de estado me ajudou em diversas situações no debug e numa aplicação maior faria toda a diferença. Durante o desenvolvimento do projeto foi de vital importância a compreensão visual do estado da aplicação. Usando a extênsão para navegador ficou claro o que estava acontecendo e que gargalos de perfomance poderiam ser diminuídos e como fazer isso.
+  O gerenciamento de estado me ajudou em diversas situações no debug e numa aplicação maior faria toda a diferença. Durante o desenvolvimento do projeto foi de vital importância a compreensão visual do estado da aplicação. Usando a extensão para navegador ficou claro o que estava acontecendo e que gargalos de perfomance poderiam ser diminuídos e como fazer isso.
 
   Ter uma estrutura bem definida, uma única fonte de onde todos os componentes podem beber, cria um código mais previsível e organizado.
 - [X] <b style="font-size: 13px">`__icons.scss` e `__images.scss` patern</b>
